@@ -16,11 +16,11 @@ const manrope = Manrope({
 });
 
 const SERVICES = [
-  { name: "Masterclass", description: "Intensive group vocal workshop exploring advanced techniques", price: "500 €", slug: "masterclass" },
-  { name: "One-on-One Coaching", description: "Private sessions tailored to your unique vocal identity", price: "80 €", slug: "coaching-1h" },
-  { name: "Vocal Health", description: "Physiological and emotional exploration of your instrument", price: "350 €", slug: "pack-5" },
-  { name: "Pack 10 Sessions", description: "Deep commitment to vocal transformation over 10 sessions", price: "650 €", slug: "pack-10" },
-  { name: "Sankofa Unit", description: "Join the acclaimed Sankofa Unit choir — by audition", price: "Sur devis", slug: "sankofa-unit" },
+  { name: "Masterclass", description: "Atelier vocal intensif en groupe explorant les techniques avancées", price: "500 €", slug: "masterclass" },
+  { name: "Coaching Individuel", description: "Sessions privées adaptées à votre identité vocale unique", price: "80 €", slug: "coaching-1h" },
+  { name: "Santé Vocale", description: "Exploration physiologique et émotionnelle de votre instrument", price: "350 €", slug: "pack-5" },
+  { name: "Pack 10 Sessions", description: "Engagement profond vers la transformation vocale sur 10 sessions", price: "650 €", slug: "pack-10" },
+  { name: "Sankofa Unit", description: "Rejoignez le célèbre chœur Sankofa Unit — sur audition", price: "Sur devis", slug: "sankofa-unit" },
 ];
 
 const TRACKS = [
@@ -85,10 +85,10 @@ export default function JobySmithPage() {
         </a>
 
         <div style={{ display: "flex", alignItems: "center", gap: "2.5rem" }} className="nav-links">
-          {["Gallery", "Coaching", "Bookings", "Archive"].map((link) => (
+          {[{ label: "Galerie", href: "gallery" }, { label: "Coaching", href: "coaching" }, { label: "Réservations", href: "bookings" }, { label: "Archive", href: "archive" }].map((link) => (
             <a
-              key={link}
-              href={`/entrealm/${link.toLowerCase()}`}
+              key={link.href}
+              href={`/entrealm/${link.href}`}
               className={manrope.className}
               style={{
                 fontSize: "0.7rem",
@@ -102,7 +102,7 @@ export default function JobySmithPage() {
               onMouseEnter={(e) => (e.currentTarget.style.color = colors.primary)}
               onMouseLeave={(e) => (e.currentTarget.style.color = colors.outline)}
             >
-              {link}
+              {link.label}
             </a>
           ))}
           <a
@@ -216,7 +216,7 @@ export default function JobySmithPage() {
               fontWeight: 600,
             }}
           >
-            Vocal Architect &amp; Artist
+            Architecte Vocale &amp; Artiste
           </p>
 
           <h1
@@ -246,10 +246,9 @@ export default function JobySmithPage() {
               fontWeight: 400,
             }}
           >
-            A voice that traverses the boundary between the
-            stirring and the profound. Joby Smith is a critically
-            acclaimed vocalist and sonic architect dedicated to the
-            preservation of individuality.
+            Une voix qui traverse la frontière entre l&apos;émouvant et le
+            profond. Joby Smith est une artiste vocale et architecte sonore
+            dédiée à la préservation de l&apos;individualité.
           </p>
 
           <p
@@ -263,14 +262,14 @@ export default function JobySmithPage() {
               fontWeight: 400,
             }}
           >
-            With 25 years of experience in composition, performance, and
-            mentorship, she runs unparalleled vocal coaching sessions that guide
-            artists seeking to master the instrument of their soul.
+            Avec 25 ans d&apos;expérience en composition, interprétation et
+            transmission, elle propose des sessions de coaching vocal inégalées
+            qui guident les artistes vers la maîtrise de leur instrument.
           </p>
 
           {/* Service quick links */}
           <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", marginBottom: "2rem" }}>
-            {["Masterclass", "One-on-One Coaching", "Vocal Health"].map((service) => (
+            {["Masterclass", "Coaching Individuel", "Santé Vocale"].map((service) => (
               <a
                 key={service}
                 href="#services"
@@ -312,7 +311,7 @@ export default function JobySmithPage() {
               onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.9")}
               onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
             >
-              Book a Session
+              Réserver une session
             </a>
             <a
               href="#music"
@@ -337,7 +336,7 @@ export default function JobySmithPage() {
                 e.currentTarget.style.color = colors.primary;
               }}
             >
-              Play Reel
+              Voir le clip
             </a>
           </div>
         </div>
@@ -376,7 +375,7 @@ export default function JobySmithPage() {
               marginBottom: "3rem",
             }}
           >
-            Your Voice, Rediscovered
+            Votre Voix, Redécouverte
           </h2>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
@@ -459,7 +458,7 @@ export default function JobySmithPage() {
                       e.currentTarget.style.color = colors.primary;
                     }}
                   >
-                    {s.slug === "sankofa-unit" ? "Inquire" : "Book Now"}
+                    {s.slug === "sankofa-unit" ? "Renseignements" : "Réserver"}
                   </a>
                 </div>
               </div>
@@ -552,7 +551,7 @@ export default function JobySmithPage() {
               fontWeight: 600,
             }}
           >
-            Philosophy
+            Philosophie
           </p>
 
           <h2
@@ -566,9 +565,9 @@ export default function JobySmithPage() {
               marginBottom: "2rem",
             }}
           >
-            The Philosophy
+            La Philosophie
             <br />
-            of Sound
+            du Son
           </h2>
 
           <p
@@ -582,9 +581,9 @@ export default function JobySmithPage() {
               marginBottom: "2rem",
             }}
           >
-            Music is not merely heard; it is inhabited. In our sessions,
-            we explore the physiological and emotional landscape of your
-            voice to uncover a timbre that is uniquely yours.
+            La musique ne s&apos;entend pas seulement ; elle s&apos;habite. Dans nos
+            sessions, nous explorons le paysage physiologique et émotionnel de
+            votre voix pour révéler un timbre qui n&apos;appartient qu&apos;à vous.
           </p>
 
           <a
@@ -606,7 +605,7 @@ export default function JobySmithPage() {
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
           >
-            Start the Journey
+            Commencer le Voyage
           </a>
         </div>
       </section>
@@ -632,7 +631,7 @@ export default function JobySmithPage() {
               fontWeight: 600,
             }}
           >
-            Listen
+            Écouter
           </p>
           <h2
             className={notoSerif.className}
@@ -644,7 +643,7 @@ export default function JobySmithPage() {
               marginBottom: "3rem",
             }}
           >
-            Featured Tracks
+            Titres Phares
           </h2>
 
           {/* Audio player-style track list */}
@@ -779,14 +778,14 @@ export default function JobySmithPage() {
             letterSpacing: "0.05em",
           }}
         >
-          © 2026 Joby Smith · All Rights Reserved
+          © 2026 Joby Smith · Tous droits réservés
         </p>
 
         <div style={{ display: "flex", gap: "2rem" }}>
-          {["Privacy", "Terms", "Contact"].map((link) => (
+          {[{ label: "Confidentialité", href: "privacy" }, { label: "Conditions", href: "terms" }, { label: "Contact", href: "contact" }].map((link) => (
             <a
-              key={link}
-              href={`/entrealm/${link.toLowerCase()}`}
+              key={link.href}
+              href={`/entrealm/${link.href}`}
               className={manrope.className}
               style={{
                 fontSize: "0.65rem",
@@ -800,7 +799,7 @@ export default function JobySmithPage() {
               onMouseEnter={(e) => (e.currentTarget.style.color = colors.primary)}
               onMouseLeave={(e) => (e.currentTarget.style.color = colors.outline)}
             >
-              {link}
+              {link.label}
             </a>
           ))}
         </div>
