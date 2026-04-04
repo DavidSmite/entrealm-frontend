@@ -1,6 +1,6 @@
 "use client";
 
-import { Noto_Serif, Manrope } from "next/font/google";
+import { Noto_Serif, Manrope, Cormorant_Garamond } from "next/font/google";
 import { useState } from "react";
 import Image from "next/image";
 
@@ -8,6 +8,12 @@ const notoSerif = Noto_Serif({
   subsets: ["latin"],
   weight: ["400", "700"],
   style: ["normal", "italic"],
+});
+
+const titleFont = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400"],
+  style: ["italic"],
 });
 
 const manrope = Manrope({
@@ -220,9 +226,9 @@ export default function JobySmithPage() {
           </p>
 
           <h1
-            className={notoSerif.className}
+            className={titleFont.className}
             style={{
-              fontSize: "clamp(3rem, 5vw, 5rem)",
+              fontSize: "clamp(4rem, 8vw, 7rem)",
               fontWeight: 400,
               letterSpacing: "-0.02em",
               color: colors.onSurface,
