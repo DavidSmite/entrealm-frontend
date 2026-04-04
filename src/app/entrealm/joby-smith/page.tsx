@@ -1,25 +1,26 @@
 "use client";
 
-import { Cormorant_Garamond, Cinzel } from "next/font/google";
+import { Noto_Serif, Manrope } from "next/font/google";
 import { useState } from "react";
+import Image from "next/image";
 
-const cormorant = Cormorant_Garamond({
+const notoSerif = Noto_Serif({
   subsets: ["latin"],
-  weight: ["400", "600"],
+  weight: ["400", "700"],
   style: ["normal", "italic"],
 });
 
-const cinzel = Cinzel({
+const manrope = Manrope({
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const SERVICES = [
-  { name: "Coaching individuel 1h", price: "80 €", slug: "coaching-1h" },
-  { name: "Pack 5 séances", price: "350 €", slug: "pack-5" },
-  { name: "Pack 10 séances", price: "650 €", slug: "pack-10" },
-  { name: "Masterclass", price: "500 €", slug: "masterclass" },
-  { name: "Sankofa Unit", price: "Sur devis", slug: "sankofa-unit" },
+  { name: "Masterclass", description: "Intensive group vocal workshop exploring advanced techniques", price: "500 €", slug: "masterclass" },
+  { name: "One-on-One Coaching", description: "Private sessions tailored to your unique vocal identity", price: "80 €", slug: "coaching-1h" },
+  { name: "Vocal Health", description: "Physiological and emotional exploration of your instrument", price: "350 €", slug: "pack-5" },
+  { name: "Pack 10 Sessions", description: "Deep commitment to vocal transformation over 10 sessions", price: "650 €", slug: "pack-10" },
+  { name: "Sankofa Unit", description: "Join the acclaimed Sankofa Unit choir — by audition", price: "Sur devis", slug: "sankofa-unit" },
 ];
 
 const TRACKS = [
@@ -28,331 +29,832 @@ const TRACKS = [
   { title: "Breathe", duration: "5:01" },
 ];
 
+const colors = {
+  background: "#15130f",
+  surface: "#0a0906",
+  surfaceContainerLow: "#1d1b17",
+  surfaceContainer: "#211f1b",
+  surfaceContainerHigh: "#2c2a25",
+  surfaceContainerHighest: "#363530",
+  primary: "#e6c364",
+  primaryContainer: "#c9a84c",
+  onSurface: "#e7e2db",
+  onSurfaceVariant: "#d0c5b2",
+  outline: "#99907e",
+  outlineVariant: "#4d4637",
+};
+
 export default function JobySmithPage() {
   const [imgError, setImgError] = useState(false);
+  const [activeTrack, setActiveTrack] = useState<number | null>(null);
 
   return (
-    <div
-      className={cormorant.className}
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "#0a0906",
-        color: "#f5ede0",
-        display: "flex",
-        flexDirection: "row",
-      }}
-    >
-      {/* ── LEFT: PHOTO ── */}
-      <div
+    <div className={manrope.className} style={{ minHeight: "100vh", backgroundColor: colors.surface, color: colors.onSurface }}>
+
+      {/* ── NAVIGATION ── */}
+      <nav
         style={{
-          position: "relative",
-          width: "50%",
-          minHeight: "100vh",
-          flexShrink: 0,
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "1.25rem 3rem",
+          backgroundColor: "rgba(10, 9, 6, 0.7)",
+          backdropFilter: "blur(30px)",
+          WebkitBackdropFilter: "blur(30px)",
         }}
-        className="left-column"
+        className="nav-bar"
       >
-        {!imgError ? (
-          <img
-            src="/joby-smith.jpg"
-            alt="Joby Smith"
-            onError={() => setImgError(true)}
+        <a
+          href="/entrealm"
+          className={notoSerif.className}
+          style={{
+            fontSize: "0.85rem",
+            letterSpacing: "0.15em",
+            textTransform: "uppercase",
+            color: colors.onSurface,
+            textDecoration: "none",
+            fontWeight: 400,
+          }}
+        >
+          Entrealm
+        </a>
+
+        <div style={{ display: "flex", alignItems: "center", gap: "2.5rem" }} className="nav-links">
+          {["Gallery", "Coaching", "Bookings", "Archive"].map((link) => (
+            <a
+              key={link}
+              href={`/entrealm/${link.toLowerCase()}`}
+              className={manrope.className}
+              style={{
+                fontSize: "0.7rem",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: colors.outline,
+                textDecoration: "none",
+                fontWeight: 500,
+                transition: "color 0.3s ease",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = colors.primary)}
+              onMouseLeave={(e) => (e.currentTarget.style.color = colors.outline)}
+            >
+              {link}
+            </a>
+          ))}
+          <a
+            href="mailto:contact@entrealm.com?subject=Joby Smith — Contact"
             style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center top",
-            }}
-          />
-        ) : (
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              backgroundColor: "#1a1610",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              padding: "0.5rem 1.5rem",
+              background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryContainer})`,
+              color: colors.surface,
+              fontSize: "0.7rem",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              textDecoration: "none",
+              fontWeight: 600,
             }}
           >
-            <span
-              className={cinzel.className}
-              style={{ fontSize: "4rem", color: "#c9a84c", fontWeight: 400 }}
-            >
-              JS
-            </span>
-          </div>
-        )}
-        {/* Gradient overlay */}
+            Contact
+          </a>
+        </div>
+      </nav>
+
+      {/* ── HERO SECTION ── */}
+      <section
+        style={{
+          position: "relative",
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          padding: "8rem 3rem 4rem",
+          backgroundColor: colors.surface,
+          overflow: "hidden",
+        }}
+        className="hero-section"
+      >
+        {/* Hero photo — left side */}
         <div
           style={{
             position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(to right, transparent 40%, #0a0906 100%)",
-            pointerEvents: "none",
+            top: 0,
+            left: 0,
+            width: "55%",
+            height: "100%",
           }}
-        />
-      </div>
-
-      {/* ── RIGHT: CONTENT ── */}
-      <div
-        style={{
-          width: "50%",
-          minHeight: "100vh",
-          overflowY: "auto",
-          padding: "4rem 3rem 3rem 2rem",
-          display: "flex",
-          flexDirection: "column",
-          gap: "2.5rem",
-        }}
-        className="right-column"
-      >
-        {/* Header */}
-        <div>
-          <p
-            className={cinzel.className}
-            style={{
-              fontSize: "0.7rem",
-              letterSpacing: "0.3em",
-              textTransform: "uppercase",
-              color: "#c9a84c",
-              marginBottom: "1.2rem",
-            }}
-          >
-            ENTREALM
-          </p>
-
-          <h1
-            className={cinzel.className}
-            style={{
-              fontSize: "clamp(2.5rem, 4vw, 3.5rem)",
-              fontWeight: 400,
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              color: "#f5ede0",
-              lineHeight: 1.1,
-              marginBottom: "1rem",
-            }}
-          >
-            Joby Smith
-          </h1>
-
-          <p
-            style={{
-              fontSize: "1.35rem",
-              fontStyle: "italic",
-              color: "#d5cdc0",
-              letterSpacing: "0.04em",
-              marginBottom: "1.5rem",
-            }}
-          >
-            Auteure · Compositrice · Interprète
-          </p>
-
+          className="hero-image-container"
+        >
+          {!imgError ? (
+            <Image
+              src="/joby-smith.jpg"
+              alt="Joby Smith"
+              fill
+              priority
+              style={{ objectFit: "cover", objectPosition: "center top" }}
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                backgroundColor: colors.surfaceContainerLow,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <span
+                className={notoSerif.className}
+                style={{ fontSize: "8rem", color: colors.primaryContainer, fontWeight: 400, opacity: 0.4 }}
+              >
+                JS
+              </span>
+            </div>
+          )}
+          {/* Gradient fade to content */}
           <div
             style={{
-              width: "60px",
-              height: "1px",
-              backgroundColor: "#c9a84c",
+              position: "absolute",
+              inset: 0,
+              background: `linear-gradient(to right, transparent 30%, ${colors.surface} 95%)`,
+              pointerEvents: "none",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: `linear-gradient(to top, ${colors.surface} 0%, transparent 30%)`,
+              pointerEvents: "none",
             }}
           />
         </div>
 
-        {/* Bio */}
-        <p
-          style={{
-            fontSize: "1.15rem",
-            lineHeight: 1.85,
-            color: "#d5cdc0",
-            maxWidth: "520px",
-          }}
-        >
-          Artiste aux multiples facettes, Joby Smith mêle depuis 25 ans
-          composition, interprétation et transmission. Cheffe du chœur Sankofa
-          Unit, elle accompagne artistes et amateurs vers leur expression vocale
-          authentique.
-        </p>
-
-        {/* Separator */}
+        {/* Hero content — right side */}
         <div
           style={{
-            width: "40px",
-            height: "1px",
-            backgroundColor: "rgba(201,168,76,0.4)",
+            position: "relative",
+            marginLeft: "auto",
+            width: "45%",
+            maxWidth: "600px",
+            zIndex: 10,
           }}
-        />
-
-        {/* Services */}
-        <div>
-          <h2
-            className={cinzel.className}
+          className="hero-content"
+        >
+          <p
+            className={manrope.className}
             style={{
-              fontSize: "0.9rem",
-              fontWeight: 400,
-              letterSpacing: "0.14em",
+              fontSize: "0.65rem",
+              letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "#c9a84c",
-              marginBottom: "1.2rem",
+              color: colors.outline,
+              marginBottom: "1.5rem",
+              fontWeight: 600,
+            }}
+          >
+            Vocal Architect &amp; Artist
+          </p>
+
+          <h1
+            className={notoSerif.className}
+            style={{
+              fontSize: "clamp(3rem, 5vw, 5rem)",
+              fontWeight: 400,
+              letterSpacing: "-0.02em",
+              color: colors.onSurface,
+              lineHeight: 1.05,
+              marginBottom: "2rem",
+            }}
+          >
+            Joby
+            <br />
+            Smith
+          </h1>
+
+          <p
+            className={manrope.className}
+            style={{
+              fontSize: "0.95rem",
+              lineHeight: 1.8,
+              color: colors.onSurfaceVariant,
+              maxWidth: "440px",
+              marginBottom: "2.5rem",
+              fontWeight: 400,
+            }}
+          >
+            A voice that traverses the boundary between the
+            stirring and the profound. Joby Smith is a critically
+            acclaimed vocalist and sonic architect dedicated to the
+            preservation of individuality.
+          </p>
+
+          <p
+            className={manrope.className}
+            style={{
+              fontSize: "0.85rem",
+              lineHeight: 1.8,
+              color: colors.outline,
+              maxWidth: "440px",
+              marginBottom: "3rem",
+              fontWeight: 400,
+            }}
+          >
+            With 25 years of experience in composition, performance, and
+            mentorship, she runs unparalleled vocal coaching sessions that guide
+            artists seeking to master the instrument of their soul.
+          </p>
+
+          {/* Service quick links */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", marginBottom: "2rem" }}>
+            {["Masterclass", "One-on-One Coaching", "Vocal Health"].map((service) => (
+              <a
+                key={service}
+                href="#services"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  padding: "1rem 1.5rem",
+                  backgroundColor: colors.surfaceContainerLow,
+                  color: colors.onSurface,
+                  textDecoration: "none",
+                  fontSize: "0.95rem",
+                  fontWeight: 500,
+                  transition: "background-color 0.3s ease",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = colors.surfaceContainer)}
+                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = colors.surfaceContainerLow)}
+              >
+                <span>{service}</span>
+                <span style={{ color: colors.outline, fontSize: "1.2rem" }}>&#8250;</span>
+              </a>
+            ))}
+          </div>
+
+          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+            <a
+              href="/entrealm/booking?artist=joby-smith"
+              style={{
+                padding: "0.85rem 2.2rem",
+                background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryContainer})`,
+                color: colors.surface,
+                fontSize: "0.7rem",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                textDecoration: "none",
+                fontWeight: 700,
+                transition: "opacity 0.3s ease",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.9")}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+            >
+              Book a Session
+            </a>
+            <a
+              href="#music"
+              style={{
+                padding: "0.85rem 2.2rem",
+                border: `1px solid rgba(230, 195, 100, 0.4)`,
+                color: colors.primary,
+                fontSize: "0.7rem",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                textDecoration: "none",
+                fontWeight: 600,
+                backgroundColor: "transparent",
+                transition: "all 0.3s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = colors.primary;
+                e.currentTarget.style.color = colors.surface;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "transparent";
+                e.currentTarget.style.color = colors.primary;
+              }}
+            >
+              Play Reel
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SERVICES SECTION ── */}
+      <section
+        id="services"
+        style={{
+          padding: "6rem 3rem",
+          backgroundColor: colors.surfaceContainerLow,
+        }}
+        className="services-section"
+      >
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <p
+            className={manrope.className}
+            style={{
+              fontSize: "0.65rem",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: colors.outline,
+              marginBottom: "1rem",
+              fontWeight: 600,
             }}
           >
             Services
+          </p>
+          <h2
+            className={notoSerif.className}
+            style={{
+              fontSize: "clamp(2rem, 3.5vw, 3rem)",
+              fontWeight: 400,
+              letterSpacing: "-0.02em",
+              color: colors.onSurface,
+              marginBottom: "3rem",
+            }}
+          >
+            Your Voice, Rediscovered
           </h2>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-            {SERVICES.map((s) => (
+          <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
+            {SERVICES.map((s, i) => (
               <div
                 key={s.slug}
                 style={{
-                  backgroundColor: "rgba(245,237,224,0.03)",
-                  border: "1px solid rgba(201,168,76,0.2)",
-                  borderRadius: "4px",
-                  padding: "1rem 1.25rem",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
                   flexWrap: "wrap",
-                  gap: "0.75rem",
+                  gap: "1.5rem",
+                  padding: "2rem 0",
+                  backgroundColor: i % 2 === 0 ? "transparent" : colors.surfaceContainer,
+                  paddingLeft: i % 2 === 0 ? "0" : "2rem",
+                  paddingRight: i % 2 === 0 ? "0" : "2rem",
+                  transition: "background-color 0.3s ease",
                 }}
               >
-                <div>
-                  <p style={{ fontSize: "1.05rem", color: "#f5ede0", marginBottom: "0.15rem" }}>
-                    {s.name}
-                  </p>
-                  <p
-                    className={cinzel.className}
-                    style={{ fontSize: "0.95rem", color: "#c9a84c", fontWeight: 400 }}
+                <div style={{ flex: 1, minWidth: "260px" }}>
+                  <h3
+                    className={notoSerif.className}
+                    style={{
+                      fontSize: "1.3rem",
+                      fontWeight: 400,
+                      color: colors.onSurface,
+                      marginBottom: "0.5rem",
+                    }}
                   >
-                    {s.price}
+                    {s.name}
+                  </h3>
+                  <p
+                    className={manrope.className}
+                    style={{
+                      fontSize: "0.85rem",
+                      color: colors.outline,
+                      fontWeight: 400,
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {s.description}
                   </p>
                 </div>
-                <a
-                  href={
-                    s.slug === "sankofa-unit"
-                      ? "mailto:contact@entrealm.com?subject=Sankofa Unit — Demande de devis"
-                      : `/entrealm/booking?artist=joby-smith&service=${s.slug}`
-                  }
-                  className={cinzel.className}
-                  style={{
-                    display: "inline-block",
-                    padding: "0.5rem 1.3rem",
-                    border: "1px solid #c9a84c",
-                    color: "#c9a84c",
-                    fontSize: "0.7rem",
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    textDecoration: "none",
-                    transition: "all 0.3s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = "#c9a84c";
-                    e.currentTarget.style.color = "#0a0906";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = "transparent";
-                    e.currentTarget.style.color = "#c9a84c";
-                  }}
-                >
-                  {s.slug === "sankofa-unit" ? "Contacter" : "Réserver"}
-                </a>
+
+                <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
+                  <span
+                    className={manrope.className}
+                    style={{
+                      fontSize: "1.1rem",
+                      color: colors.primary,
+                      fontWeight: 600,
+                    }}
+                  >
+                    {s.price}
+                  </span>
+                  <a
+                    href={
+                      s.slug === "sankofa-unit"
+                        ? "mailto:contact@entrealm.com?subject=Sankofa Unit — Demande de devis"
+                        : `/entrealm/booking?artist=joby-smith&service=${s.slug}`
+                    }
+                    className={manrope.className}
+                    style={{
+                      padding: "0.65rem 1.8rem",
+                      border: `1px solid rgba(230, 195, 100, 0.4)`,
+                      color: colors.primary,
+                      fontSize: "0.65rem",
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                      textDecoration: "none",
+                      fontWeight: 600,
+                      transition: "all 0.3s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = colors.primary;
+                      e.currentTarget.style.color = colors.surface;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = "transparent";
+                      e.currentTarget.style.color = colors.primary;
+                    }}
+                  >
+                    {s.slug === "sankofa-unit" ? "Inquire" : "Book Now"}
+                  </a>
+                </div>
               </div>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Separator */}
+      {/* ── PHILOSOPHY SECTION ── */}
+      <section
+        style={{
+          display: "flex",
+          alignItems: "stretch",
+          minHeight: "70vh",
+          backgroundColor: colors.surface,
+        }}
+        className="philosophy-section"
+      >
+        {/* Photo side */}
         <div
           style={{
-            width: "40px",
-            height: "1px",
-            backgroundColor: "rgba(201,168,76,0.4)",
+            position: "relative",
+            width: "50%",
+            minHeight: "500px",
           }}
-        />
-
-        {/* Musique */}
-        <div>
-          <h2
-            className={cinzel.className}
+          className="philosophy-image"
+        >
+          {!imgError ? (
+            <Image
+              src="/joby-smith.jpg"
+              alt="Joby Smith performing"
+              fill
+              style={{
+                objectFit: "cover",
+                objectPosition: "center 30%",
+                filter: "brightness(0.7)",
+              }}
+            />
+          ) : (
+            <div style={{ width: "100%", height: "100%", backgroundColor: colors.surfaceContainerLow }} />
+          )}
+          <div
             style={{
-              fontSize: "0.9rem",
-              fontWeight: 400,
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              color: "#c9a84c",
-              marginBottom: "1.2rem",
+              position: "absolute",
+              inset: 0,
+              background: `linear-gradient(to right, transparent 60%, ${colors.surface} 100%)`,
+              pointerEvents: "none",
+            }}
+          />
+          {/* Play button overlay */}
+          <div
+            style={{
+              position: "absolute",
+              bottom: "3rem",
+              left: "3rem",
+              width: "60px",
+              height: "60px",
+              border: `1px solid rgba(230, 195, 100, 0.4)`,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              backgroundColor: "rgba(10, 9, 6, 0.5)",
+              backdropFilter: "blur(10px)",
             }}
           >
-            Musique
+            <span style={{ color: colors.primary, fontSize: "1.2rem", marginLeft: "3px" }}>&#9654;</span>
+          </div>
+        </div>
+
+        {/* Text side */}
+        <div
+          style={{
+            width: "50%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            padding: "4rem 4rem 4rem 3rem",
+          }}
+          className="philosophy-text"
+        >
+          <p
+            className={manrope.className}
+            style={{
+              fontSize: "0.65rem",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: colors.outline,
+              marginBottom: "1.5rem",
+              fontWeight: 600,
+            }}
+          >
+            Philosophy
+          </p>
+
+          <h2
+            className={notoSerif.className}
+            style={{
+              fontSize: "clamp(1.8rem, 3vw, 2.8rem)",
+              fontWeight: 400,
+              letterSpacing: "-0.02em",
+              color: colors.onSurface,
+              lineHeight: 1.2,
+              marginBottom: "2rem",
+            }}
+          >
+            The Philosophy
+            <br />
+            of Sound
           </h2>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+          <p
+            className={notoSerif.className}
+            style={{
+              fontSize: "1.1rem",
+              lineHeight: 1.9,
+              color: colors.onSurfaceVariant,
+              fontStyle: "italic",
+              maxWidth: "480px",
+              marginBottom: "2rem",
+            }}
+          >
+            Music is not merely heard; it is inhabited. In our sessions,
+            we explore the physiological and emotional landscape of your
+            voice to uncover a timbre that is uniquely yours.
+          </p>
+
+          <a
+            href="/entrealm/booking?artist=joby-smith"
+            className={manrope.className}
+            style={{
+              display: "inline-block",
+              width: "fit-content",
+              fontSize: "0.65rem",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: colors.primary,
+              textDecoration: "none",
+              fontWeight: 600,
+              borderBottom: `1px solid ${colors.primary}`,
+              paddingBottom: "0.3rem",
+              transition: "opacity 0.3s ease",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+          >
+            Start the Journey
+          </a>
+        </div>
+      </section>
+
+      {/* ── MUSIC SECTION ── */}
+      <section
+        id="music"
+        style={{
+          padding: "6rem 3rem",
+          backgroundColor: colors.surfaceContainerLow,
+        }}
+        className="music-section"
+      >
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <p
+            className={manrope.className}
+            style={{
+              fontSize: "0.65rem",
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: colors.outline,
+              marginBottom: "1rem",
+              fontWeight: 600,
+            }}
+          >
+            Listen
+          </p>
+          <h2
+            className={notoSerif.className}
+            style={{
+              fontSize: "clamp(2rem, 3.5vw, 3rem)",
+              fontWeight: 400,
+              letterSpacing: "-0.02em",
+              color: colors.onSurface,
+              marginBottom: "3rem",
+            }}
+          >
+            Featured Tracks
+          </h2>
+
+          {/* Audio player-style track list */}
+          <div
+            style={{
+              backgroundColor: `rgba(54, 53, 48, 0.6)`,
+              backdropFilter: "blur(30px)",
+              padding: "0",
+            }}
+          >
             {TRACKS.map((t, i) => (
               <div
                 key={i}
                 style={{
-                  backgroundColor: "rgba(245,237,224,0.03)",
-                  border: "1px solid rgba(201,168,76,0.12)",
-                  borderRadius: "4px",
-                  padding: "0.85rem 1.25rem",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
+                  padding: "1.5rem 2rem",
+                  backgroundColor: activeTrack === i ? colors.surfaceContainerHigh : "transparent",
+                  cursor: "pointer",
+                  transition: "background-color 0.3s ease",
+                }}
+                onClick={() => setActiveTrack(activeTrack === i ? null : i)}
+                onMouseEnter={(e) => {
+                  if (activeTrack !== i) e.currentTarget.style.backgroundColor = colors.surfaceContainer;
+                }}
+                onMouseLeave={(e) => {
+                  if (activeTrack !== i) e.currentTarget.style.backgroundColor = "transparent";
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: "0.85rem" }}>
-                  <span style={{ color: "#c9a84c", fontSize: "0.8rem" }}>&#9654;</span>
-                  <span style={{ fontSize: "1.05rem", color: "#f5ede0" }}>{t.title}</span>
+                <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
+                  <div
+                    style={{
+                      width: "36px",
+                      height: "36px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      border: `1px solid ${activeTrack === i ? colors.primary : colors.outlineVariant}`,
+                    }}
+                  >
+                    <span style={{ color: activeTrack === i ? colors.primary : colors.outline, fontSize: "0.7rem", marginLeft: "2px" }}>
+                      {activeTrack === i ? "❚❚" : "▶"}
+                    </span>
+                  </div>
+                  <div>
+                    <p
+                      className={notoSerif.className}
+                      style={{
+                        fontSize: "1.05rem",
+                        color: activeTrack === i ? colors.primary : colors.onSurface,
+                        fontWeight: 400,
+                      }}
+                    >
+                      {t.title}
+                    </p>
+                    <p
+                      className={manrope.className}
+                      style={{
+                        fontSize: "0.7rem",
+                        color: colors.outline,
+                        letterSpacing: "0.1em",
+                        textTransform: "uppercase",
+                        marginTop: "0.2rem",
+                        fontWeight: 500,
+                      }}
+                    >
+                      Joby Smith
+                    </p>
+                  </div>
                 </div>
-                <span style={{ fontSize: "0.85rem", color: "#777" }}>{t.duration}</span>
+
+                <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
+                  {/* Progress bar (visual only) */}
+                  <div style={{ width: "200px", height: "2px", backgroundColor: colors.outlineVariant, position: "relative" }} className="progress-bar">
+                    <div
+                      style={{
+                        width: activeTrack === i ? "35%" : "0%",
+                        height: "100%",
+                        backgroundColor: colors.primary,
+                        transition: "width 0.5s ease",
+                      }}
+                    />
+                  </div>
+                  <span
+                    className={manrope.className}
+                    style={{ fontSize: "0.8rem", color: colors.outline, fontWeight: 500, minWidth: "35px" }}
+                  >
+                    {t.duration}
+                  </span>
+                </div>
               </div>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Footer */}
-        <div style={{ marginTop: "auto", paddingTop: "2rem" }}>
-          <div
-            style={{
-              width: "40px",
-              height: "1px",
-              backgroundColor: "rgba(201,168,76,0.2)",
-              marginBottom: "1.2rem",
-            }}
-          />
-          <a
-            href="/entrealm"
-            style={{
-              fontSize: "0.8rem",
-              color: "#777",
-              textDecoration: "none",
-              letterSpacing: "0.06em",
-              transition: "color 0.3s ease",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#c9a84c")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "#777")}
-          >
-            Propulsé par <span className={cinzel.className}>ENTREALM</span>
-          </a>
+      {/* ── FOOTER ── */}
+      <footer
+        style={{
+          padding: "3rem",
+          backgroundColor: colors.surface,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: "1rem",
+        }}
+        className="footer"
+      >
+        <a
+          href="/entrealm"
+          className={notoSerif.className}
+          style={{
+            fontSize: "0.8rem",
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            color: colors.outline,
+            textDecoration: "none",
+            fontWeight: 400,
+          }}
+        >
+          Entrealm
+        </a>
+
+        <p
+          className={manrope.className}
+          style={{
+            fontSize: "0.7rem",
+            color: colors.outlineVariant,
+            fontWeight: 400,
+            letterSpacing: "0.05em",
+          }}
+        >
+          © 2026 Joby Smith · All Rights Reserved
+        </p>
+
+        <div style={{ display: "flex", gap: "2rem" }}>
+          {["Privacy", "Terms", "Contact"].map((link) => (
+            <a
+              key={link}
+              href={`/entrealm/${link.toLowerCase()}`}
+              className={manrope.className}
+              style={{
+                fontSize: "0.65rem",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: colors.outline,
+                textDecoration: "none",
+                fontWeight: 500,
+                transition: "color 0.3s ease",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = colors.primary)}
+              onMouseLeave={(e) => (e.currentTarget.style.color = colors.outline)}
+            >
+              {link}
+            </a>
+          ))}
         </div>
-      </div>
+      </footer>
 
-      {/* ── RESPONSIVE ── */}
+      {/* ── RESPONSIVE STYLES ── */}
       <style>{`
         @media (max-width: 768px) {
-          .left-column {
-            width: 100% !important;
-            min-height: 45vh !important;
-            height: 45vh !important;
+          .nav-bar {
+            padding: 1rem 1.5rem !important;
           }
-          .right-column {
-            width: 100% !important;
-            min-height: auto !important;
-            padding: 2.5rem 1.5rem 2rem !important;
+          .nav-links {
+            display: none !important;
           }
-          div:has(> .left-column) {
+          .hero-section {
             flex-direction: column !important;
+            padding: 0 !important;
+            min-height: auto !important;
+          }
+          .hero-image-container {
+            position: relative !important;
+            width: 100% !important;
+            height: 60vh !important;
+          }
+          .hero-content {
+            width: 100% !important;
+            margin-left: 0 !important;
+            padding: 2.5rem 1.5rem 3rem !important;
+            max-width: 100% !important;
+          }
+          .services-section {
+            padding: 4rem 1.5rem !important;
+          }
+          .philosophy-section {
+            flex-direction: column !important;
+          }
+          .philosophy-image {
+            width: 100% !important;
+            min-height: 50vh !important;
+          }
+          .philosophy-text {
+            width: 100% !important;
+            padding: 3rem 1.5rem !important;
+          }
+          .music-section {
+            padding: 4rem 1.5rem !important;
+          }
+          .progress-bar {
+            display: none !important;
+          }
+          .footer {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            padding: 2.5rem 1.5rem !important;
           }
         }
       `}</style>
