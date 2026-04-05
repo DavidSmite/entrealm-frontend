@@ -334,73 +334,22 @@ export default function JobySmithPage() {
       {/* ── PHILOSOPHY SECTION ── */}
       <section
         style={{
+          backgroundColor: "#0f0d0a",
+          borderTop: "1px solid rgba(201,168,76,0.15)",
+          borderBottom: "1px solid rgba(201,168,76,0.15)",
+          padding: "5rem 3rem",
           display: "flex",
-          alignItems: "stretch",
-          minHeight: "70vh",
-          backgroundColor: colors.surface,
+          alignItems: "center",
+          justifyContent: "center",
         }}
         className="philosophy-section"
       >
-        {/* Photo side */}
         <div
           style={{
-            position: "relative",
-            width: "50%",
-            minHeight: "500px",
-          }}
-          className="philosophy-image"
-        >
-          {!imgError ? (
-            <Image
-              src="/joby-smith.jpg"
-              alt="Joby Smith performing"
-              fill
-              style={{
-                objectFit: "cover",
-                objectPosition: "center 30%",
-                filter: "brightness(0.7)",
-              }}
-            />
-          ) : (
-            <div style={{ width: "100%", height: "100%", backgroundColor: colors.surfaceContainerLow }} />
-          )}
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: `linear-gradient(to right, transparent 60%, ${colors.surface} 100%)`,
-              pointerEvents: "none",
-            }}
-          />
-          {/* Play button overlay */}
-          <div
-            style={{
-              position: "absolute",
-              bottom: "3rem",
-              left: "3rem",
-              width: "60px",
-              height: "60px",
-              border: `1px solid rgba(230, 195, 100, 0.4)`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-              backgroundColor: "rgba(10, 9, 6, 0.5)",
-              backdropFilter: "blur(10px)",
-            }}
-          >
-            <span style={{ color: colors.primary, fontSize: "1.2rem", marginLeft: "3px" }}>&#9654;</span>
-          </div>
-        </div>
-
-        {/* Text side */}
-        <div
-          style={{
-            width: "50%",
+            maxWidth: "700px",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            padding: "4rem 4rem 4rem 3rem",
           }}
           className="philosophy-text"
         >
@@ -695,14 +644,6 @@ export default function JobySmithPage() {
             max-width: 100% !important;
           }
           .philosophy-section {
-            flex-direction: column !important;
-          }
-          .philosophy-image {
-            width: 100% !important;
-            min-height: 50vh !important;
-          }
-          .philosophy-text {
-            width: 100% !important;
             padding: 3rem 1.5rem !important;
           }
           .music-section {
