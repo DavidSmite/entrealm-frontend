@@ -400,7 +400,7 @@ export default function JobySmithPage() {
           </p>
 
           <a
-            href="/entrealm/booking?artist=joby-smith"
+            href="/entrealm/joby-smith/coaching"
             className={manrope.className}
             style={{
               display: "inline-block",
