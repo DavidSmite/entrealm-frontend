@@ -3,6 +3,7 @@
 import { Noto_Serif, Manrope, Cormorant_Garamond } from "next/font/google";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const notoSerif = Noto_Serif({
   subsets: ["latin"],
@@ -265,7 +266,7 @@ export default function JobySmithPage() {
             qui guident les artistes vers la maîtrise de leur instrument.
           </p>
 
-          <a
+          <Link
             href="/entrealm/joby-smith/coaching"
             className={notoSerif.className}
             style={{
@@ -281,10 +282,10 @@ export default function JobySmithPage() {
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
           >
             Coaching vocal &amp; pédagogie →
-          </a>
+          </Link>
 
           <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-            <a
+            <Link
               href="/entrealm/booking?artist=joby-smith"
               style={{
                 padding: "0.85rem 2.2rem",
@@ -301,7 +302,7 @@ export default function JobySmithPage() {
               onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
             >
               Réserver une session
-            </a>
+            </Link>
             <a
               href="#music"
               style={{
@@ -399,7 +400,7 @@ export default function JobySmithPage() {
             votre voix pour révéler un timbre qui n&apos;appartient qu&apos;à vous.
           </p>
 
-          <a
+          <Link
             href="/entrealm/joby-smith/coaching"
             className={manrope.className}
             style={{
@@ -419,7 +420,7 @@ export default function JobySmithPage() {
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
           >
             Commencer le Voyage
-          </a>
+          </Link>
         </div>
       </section>
 
