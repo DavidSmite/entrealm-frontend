@@ -21,14 +21,6 @@ const manrope = Manrope({
   weight: ["400", "500", "600", "700"],
 });
 
-const SERVICES = [
-  { name: "Masterclass", description: "Atelier vocal intensif en groupe explorant les techniques avancées", price: "500 €", slug: "masterclass" },
-  { name: "Coaching Individuel", description: "Sessions privées adaptées à votre identité vocale unique", price: "80 €", slug: "coaching-1h" },
-  { name: "Santé Vocale", description: "Exploration physiologique et émotionnelle de votre instrument", price: "350 €", slug: "pack-5" },
-  { name: "Pack 10 Sessions", description: "Engagement profond vers la transformation vocale sur 10 sessions", price: "650 €", slug: "pack-10" },
-  { name: "Sankofa Unit", description: "Rejoignez le célèbre chœur Sankofa Unit — sur audition", price: "Sur devis", slug: "sankofa-unit" },
-];
-
 const TRACKS = [
   { title: "Rise Again", duration: "4:12" },
   { title: "Lumière d'Afrique", duration: "3:47" },
@@ -273,32 +265,23 @@ export default function JobySmithPage() {
             qui guident les artistes vers la maîtrise de leur instrument.
           </p>
 
-          {/* Service quick links */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", marginBottom: "2rem" }}>
-            {["Masterclass", "Coaching Individuel", "Santé Vocale"].map((service) => (
-              <a
-                key={service}
-                href="#services"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  padding: "1rem 1.5rem",
-                  backgroundColor: colors.surfaceContainerLow,
-                  color: colors.onSurface,
-                  textDecoration: "none",
-                  fontSize: "0.95rem",
-                  fontWeight: 500,
-                  transition: "background-color 0.3s ease",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = colors.surfaceContainer)}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = colors.surfaceContainerLow)}
-              >
-                <span>{service}</span>
-                <span style={{ color: colors.outline, fontSize: "1.2rem" }}>&#8250;</span>
-              </a>
-            ))}
-          </div>
+          <a
+            href="/entrealm/joby-smith/coaching"
+            className={notoSerif.className}
+            style={{
+              fontSize: "0.85rem",
+              color: "#c9a84c",
+              textDecoration: "underline",
+              textUnderlineOffset: "4px",
+              marginBottom: "2.5rem",
+              display: "inline-block",
+              transition: "opacity 0.3s ease",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+          >
+            Coaching vocal &amp; pédagogie →
+          </a>
 
           <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
             <a
@@ -344,131 +327,6 @@ export default function JobySmithPage() {
             >
               Voir le clip
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ── SERVICES SECTION ── */}
-      <section
-        id="services"
-        style={{
-          padding: "6rem 3rem",
-          backgroundColor: colors.surfaceContainerLow,
-        }}
-        className="services-section"
-      >
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <p
-            className={manrope.className}
-            style={{
-              fontSize: "0.65rem",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              color: colors.outline,
-              marginBottom: "1rem",
-              fontWeight: 600,
-            }}
-          >
-            Services
-          </p>
-          <h2
-            className={notoSerif.className}
-            style={{
-              fontSize: "clamp(2rem, 3.5vw, 3rem)",
-              fontWeight: 400,
-              letterSpacing: "-0.02em",
-              color: colors.onSurface,
-              marginBottom: "3rem",
-            }}
-          >
-            Votre Voix, Redécouverte
-          </h2>
-
-          <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
-            {SERVICES.map((s, i) => (
-              <div
-                key={s.slug}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  flexWrap: "wrap",
-                  gap: "1.5rem",
-                  padding: "2rem 0",
-                  backgroundColor: i % 2 === 0 ? "transparent" : colors.surfaceContainer,
-                  paddingLeft: i % 2 === 0 ? "0" : "2rem",
-                  paddingRight: i % 2 === 0 ? "0" : "2rem",
-                  transition: "background-color 0.3s ease",
-                }}
-              >
-                <div style={{ flex: 1, minWidth: "260px" }}>
-                  <h3
-                    className={notoSerif.className}
-                    style={{
-                      fontSize: "1.3rem",
-                      fontWeight: 400,
-                      color: colors.onSurface,
-                      marginBottom: "0.5rem",
-                    }}
-                  >
-                    {s.name}
-                  </h3>
-                  <p
-                    className={manrope.className}
-                    style={{
-                      fontSize: "0.85rem",
-                      color: colors.outline,
-                      fontWeight: 400,
-                      lineHeight: 1.6,
-                    }}
-                  >
-                    {s.description}
-                  </p>
-                </div>
-
-                <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
-                  <span
-                    className={manrope.className}
-                    style={{
-                      fontSize: "1.1rem",
-                      color: colors.primary,
-                      fontWeight: 600,
-                    }}
-                  >
-                    {s.price}
-                  </span>
-                  <a
-                    href={
-                      s.slug === "sankofa-unit"
-                        ? "mailto:contact@entrealm.com?subject=Sankofa Unit — Demande de devis"
-                        : `/entrealm/booking?artist=joby-smith&service=${s.slug}`
-                    }
-                    className={manrope.className}
-                    style={{
-                      padding: "0.65rem 1.8rem",
-                      border: `1px solid rgba(230, 195, 100, 0.4)`,
-                      color: colors.primary,
-                      fontSize: "0.65rem",
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      textDecoration: "none",
-                      fontWeight: 600,
-                      transition: "all 0.3s ease",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = colors.primary;
-                      e.currentTarget.style.color = colors.surface;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = "transparent";
-                      e.currentTarget.style.color = colors.primary;
-                    }}
-                  >
-                    {s.slug === "sankofa-unit" ? "Renseignements" : "Réserver"}
-                  </a>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -835,9 +693,6 @@ export default function JobySmithPage() {
             margin-left: 0 !important;
             padding: 2.5rem 1.5rem 3rem !important;
             max-width: 100% !important;
-          }
-          .services-section {
-            padding: 4rem 1.5rem !important;
           }
           .philosophy-section {
             flex-direction: column !important;
