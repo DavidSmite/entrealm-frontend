@@ -1,6 +1,6 @@
 "use client";
 
-import { Noto_Serif, Manrope, Cormorant_Garamond } from "next/font/google";
+import { Noto_Serif, Manrope, Pinyon_Script } from "next/font/google";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,10 +11,10 @@ const notoSerif = Noto_Serif({
   style: ["normal", "italic"],
 });
 
-const titleFont = Cormorant_Garamond({
+const pinyon = Pinyon_Script({
   subsets: ["latin"],
-  weight: ["300", "400"],
-  style: ["italic"],
+  weight: ["400"],
+  style: ["normal"],
 });
 
 const manrope = Manrope({
@@ -219,12 +219,15 @@ export default function JobySmithPage() {
           </p>
 
           <h1
-            className={titleFont.className}
             style={{
-              fontSize: "clamp(4rem, 8vw, 7rem)",
+              fontFamily: pinyon.style.fontFamily,
+              fontSize: "clamp(5rem, 10vw, 9rem)",
               fontWeight: 400,
               letterSpacing: "-0.02em",
-              color: colors.onSurface,
+              background: "linear-gradient(135deg, #c9a84c 0%, #e6c364 40%, #ffe090 55%, #c9a84c 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
               lineHeight: 1.05,
               marginBottom: "2rem",
             }}

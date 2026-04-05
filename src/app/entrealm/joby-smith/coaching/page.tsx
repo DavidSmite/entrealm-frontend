@@ -1,6 +1,6 @@
 "use client";
 
-import { Noto_Serif, Manrope, Cormorant_Garamond } from "next/font/google";
+import { Noto_Serif, Manrope, Pinyon_Script } from "next/font/google";
 import { useState } from "react";
 import Image from "next/image";
 
@@ -10,10 +10,10 @@ const notoSerif = Noto_Serif({
   style: ["normal", "italic"],
 });
 
-const titleFont = Cormorant_Garamond({
+const pinyon = Pinyon_Script({
   subsets: ["latin"],
-  weight: ["300", "400"],
-  style: ["italic"],
+  weight: ["400"],
+  style: ["normal"],
 });
 
 const manrope = Manrope({
@@ -195,11 +195,14 @@ export default function CoachingPage() {
         {/* Titre */}
         <div>
           <h1
-            className={titleFont.className}
             style={{
+              fontFamily: pinyon.style.fontFamily,
               fontSize: "clamp(2.5rem, 5vw, 4rem)",
-              fontWeight: 300,
-              color: colors.onSurface,
+              fontWeight: 400,
+              background: "linear-gradient(135deg, #c9a84c 0%, #e6c364 40%, #ffe090 55%, #c9a84c 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
               lineHeight: 1.1,
               marginBottom: "0.5rem",
             }}
