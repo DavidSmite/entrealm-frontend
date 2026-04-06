@@ -141,8 +141,11 @@ export default function JobySmithPage() {
             position: "absolute",
             top: 0,
             left: 0,
-            width: "55%",
+            maxWidth: "50%",
             height: "100%",
+            overflow: "hidden",
+            maskImage: "radial-gradient(ellipse 80% 90% at 30% 50%, black 40%, transparent 100%)",
+            WebkitMaskImage: "radial-gradient(ellipse 80% 90% at 30% 50%, black 40%, transparent 100%)",
           }}
           className="hero-image-container"
         >
@@ -152,7 +155,7 @@ export default function JobySmithPage() {
               alt="Joby Smith"
               fill
               priority
-              style={{ objectFit: "cover", objectPosition: "center top" }}
+              style={{ objectFit: "cover", objectPosition: "center" }}
               onError={() => setImgError(true)}
             />
           ) : (
@@ -174,23 +177,6 @@ export default function JobySmithPage() {
               </span>
             </div>
           )}
-          {/* Gradient fade to content */}
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: `linear-gradient(to right, transparent 30%, ${colors.surface} 95%)`,
-              pointerEvents: "none",
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: `linear-gradient(to top, ${colors.surface} 0%, transparent 30%)`,
-              pointerEvents: "none",
-            }}
-          />
         </div>
 
         {/* Hero content — right side */}
@@ -230,6 +216,7 @@ export default function JobySmithPage() {
               backgroundClip: "text",
               lineHeight: 1.05,
               marginBottom: "2rem",
+              marginLeft: "3rem",
             }}
           >
             Joby
