@@ -90,7 +90,6 @@ export default function JobySmithPage() {
           width: "100vw",
           height: "100vh",
           background: "#0a0906",
-          overflow: "hidden",
         }}
       >
         {/* Photo */}
