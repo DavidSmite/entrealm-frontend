@@ -174,25 +174,16 @@ export default function JobySmithPage() {
               </span>
             </div>
           )}
-          {/* Fondu droit */}
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: `linear-gradient(to right, transparent 50%, ${colors.surface} 100%)`,
-              pointerEvents: "none",
-            }}
-          />
-          {/* Fondu bas */}
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: `linear-gradient(to bottom, transparent 75%, ${colors.surface} 100%)`,
-              pointerEvents: "none",
-            }}
-          />
         </div>
+
+        {/* Fondu DROIT */}
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, transparent 45%, #0a0906 75%)", pointerEvents: "none", zIndex: 5 }} />
+        {/* Fondu BAS */}
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 70%, #0a0906 100%)", pointerEvents: "none", zIndex: 5 }} />
+        {/* Fondu HAUT */}
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, #0a0906 0%, transparent 15%)", pointerEvents: "none", zIndex: 5 }} />
+        {/* Fondu GAUCHE */}
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, #0a0906 0%, transparent 8%)", pointerEvents: "none", zIndex: 5 }} />
 
         {/* Contenu — right side */}
         <div
@@ -208,6 +199,7 @@ export default function JobySmithPage() {
             paddingLeft: "2rem",
             paddingRight: "3rem",
             overflow: "visible",
+            zIndex: 10,
           }}
           className="hero-content"
         >
