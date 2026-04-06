@@ -144,8 +144,10 @@ export default function JobySmithPage() {
             width: "50%",
             height: "100%",
             overflow: "hidden",
-            maskImage: "radial-gradient(ellipse 80% 90% at 30% 50%, black 40%, transparent 100%)",
-            WebkitMaskImage: "radial-gradient(ellipse 80% 90% at 30% 50%, black 40%, transparent 100%)",
+            maskImage: "linear-gradient(to right, black 55%, transparent 95%), linear-gradient(to bottom, black 75%, transparent 100%)",
+            WebkitMaskImage: "linear-gradient(to right, black 55%, transparent 95%), linear-gradient(to bottom, black 75%, transparent 100%)",
+            maskComposite: "intersect",
+            WebkitMaskComposite: "source-in",
           }}
           className="hero-image-container"
         >
@@ -187,6 +189,7 @@ export default function JobySmithPage() {
             width: "45%",
             maxWidth: "600px",
             zIndex: 10,
+            overflowX: "visible",
           }}
           className="hero-content"
         >
@@ -216,7 +219,8 @@ export default function JobySmithPage() {
               backgroundClip: "text",
               lineHeight: 1.05,
               marginBottom: "2rem",
-              marginLeft: "3rem",
+              paddingLeft: "1rem",
+              overflow: "visible",
             }}
           >
             Joby
