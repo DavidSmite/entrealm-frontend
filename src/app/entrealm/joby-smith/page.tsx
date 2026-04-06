@@ -141,7 +141,7 @@ export default function JobySmithPage() {
             position: "absolute",
             top: 0,
             left: 0,
-            maxWidth: "50%",
+            width: "50%",
             height: "100%",
             overflow: "hidden",
             maskImage: "radial-gradient(ellipse 80% 90% at 30% 50%, black 40%, transparent 100%)",
