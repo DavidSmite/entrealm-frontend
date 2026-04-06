@@ -204,14 +204,14 @@ export default function JobySmithPage() {
             >
               Réserver une session
             </Link>
-            <a
-              href="#music"
+            <Link
+              href="/entrealm/joby-smith/videos"
               style={{ padding: "0.85rem 2.2rem", border: "1px solid rgba(230,195,100,0.4)", color: "#e6c364", fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", fontWeight: 600, background: "transparent", transition: "all .3s" }}
               onMouseEnter={(e) => { e.currentTarget.style.background = "#e6c364"; e.currentTarget.style.color = "#0a0906"; }}
               onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#e6c364"; }}
             >
               Voir le clip
-            </a>
+            </Link>
           </div>
         </div>
       </div>
