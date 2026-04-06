@@ -1,25 +1,22 @@
 "use client";
 
-import { Noto_Serif, Manrope, Pinyon_Script } from "next/font/google";
+import { Pinyon_Script, Noto_Serif, Manrope } from "next/font/google";
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
-
-const notoSerif = Noto_Serif({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
-});
 
 const pinyon = Pinyon_Script({
   subsets: ["latin"],
   weight: ["400"],
-  style: ["normal"],
+});
+
+const notoSerif = Noto_Serif({
+  subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
 const manrope = Manrope({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "700"],
 });
 
 const TRACKS = [
@@ -28,30 +25,15 @@ const TRACKS = [
   { title: "Breathe", duration: "5:01" },
 ];
 
-const colors = {
-  background: "#15130f",
-  surface: "#0a0906",
-  surfaceContainerLow: "#1d1b17",
-  surfaceContainer: "#211f1b",
-  surfaceContainerHigh: "#2c2a25",
-  surfaceContainerHighest: "#363530",
-  primary: "#e6c364",
-  primaryContainer: "#c9a84c",
-  onSurface: "#e7e2db",
-  onSurfaceVariant: "#d0c5b2",
-  outline: "#99907e",
-  outlineVariant: "#4d4637",
-};
-
 export default function JobySmithPage() {
-  const [imgError, setImgError] = useState(false);
   const [activeTrack, setActiveTrack] = useState<number | null>(null);
 
   return (
-    <div className={manrope.className} style={{ minHeight: "100vh", backgroundColor: colors.surface, color: colors.onSurface }}>
+    <div className={manrope.className} style={{ background: "#0a0906", color: "#e7e2db" }}>
 
-      {/* ── NAVIGATION ── */}
+      {/* ── NAV ── */}
       <nav
+        className="nav-bar"
         style={{
           position: "fixed",
           top: 0,
@@ -62,209 +44,129 @@ export default function JobySmithPage() {
           alignItems: "center",
           justifyContent: "space-between",
           padding: "1.25rem 3rem",
-          backgroundColor: "rgba(10, 9, 6, 0.7)",
+          background: "rgba(10,9,6,0.7)",
           backdropFilter: "blur(30px)",
           WebkitBackdropFilter: "blur(30px)",
         }}
-        className="nav-bar"
       >
         <a
           href="/entrealm"
           className={notoSerif.className}
-          style={{
-            fontSize: "0.85rem",
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            color: colors.onSurface,
-            textDecoration: "none",
-            fontWeight: 400,
-          }}
+          style={{ fontSize: "0.85rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#e7e2db", textDecoration: "none" }}
         >
           Entrealm
         </a>
-
-        <div style={{ display: "flex", alignItems: "center", gap: "2.5rem" }} className="nav-links">
-          {[{ label: "Galerie", href: "gallery" }, { label: "Coaching", href: "coaching" }, { label: "Réservations", href: "bookings" }, { label: "Archive", href: "archive" }].map((link) => (
+        <div className="nav-links" style={{ display: "flex", alignItems: "center", gap: "2.5rem" }}>
+          {[
+            { label: "Galerie", href: "gallery" },
+            { label: "Coaching", href: "coaching" },
+            { label: "Réservations", href: "bookings" },
+            { label: "Archive", href: "archive" },
+          ].map((l) => (
             <a
-              key={link.href}
-              href={`/entrealm/${link.href}`}
-              className={manrope.className}
-              style={{
-                fontSize: "0.7rem",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: colors.outline,
-                textDecoration: "none",
-                fontWeight: 500,
-                transition: "color 0.3s ease",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = colors.primary)}
-              onMouseLeave={(e) => (e.currentTarget.style.color = colors.outline)}
+              key={l.href}
+              href={`/entrealm/${l.href}`}
+              style={{ fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#99907e", textDecoration: "none", fontWeight: 500, transition: "color .3s" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#e6c364")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "#99907e")}
             >
-              {link.label}
+              {l.label}
             </a>
           ))}
           <a
             href="mailto:contact@entrealm.com?subject=Joby Smith — Contact"
-            style={{
-              padding: "0.5rem 1.5rem",
-              background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryContainer})`,
-              color: colors.surface,
-              fontSize: "0.7rem",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              textDecoration: "none",
-              fontWeight: 600,
-            }}
+            style={{ padding: "0.5rem 1.5rem", background: "linear-gradient(135deg,#e6c364,#c9a84c)", color: "#0a0906", fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", fontWeight: 600 }}
           >
             Contact
           </a>
         </div>
       </nav>
 
-      {/* ── HERO SECTION ── */}
-      <section
+      {/* ── HERO ── */}
+      <div
+        className="hero-section"
         style={{
           position: "relative",
-          width: "100%",
+          width: "100vw",
           height: "100vh",
-          overflow: "visible",
-          clipPath: "none",
-          backgroundColor: colors.surface,
+          background: "#0a0906",
+          overflow: "hidden",
         }}
-        className="hero-section"
       >
-        {/* Photo — left side */}
+        {/* Photo */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/joby-smith.jpg"
+          alt="Joby Smith"
+          className="hero-photo"
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            height: "100%",
+            width: "auto",
+            maxWidth: "65%",
+            objectFit: "cover",
+            objectPosition: "center top",
+            display: "block",
+          }}
+        />
+
+        {/* Fondu droit sur la photo */}
         <div
           style={{
             position: "absolute",
             left: 0,
             top: 0,
-            width: "55%",
             height: "100%",
-            overflow: "hidden",
+            width: "65%",
+            background: "linear-gradient(to right, transparent 50%, #0a0906 100%)",
+            pointerEvents: "none",
           }}
-          className="hero-image-container"
-        >
-          {!imgError ? (
-            <Image
-              src="/joby-smith.jpg"
-              alt="Joby Smith"
-              fill
-              priority
-              style={{ objectFit: "cover", objectPosition: "center top" }}
-              onError={() => setImgError(true)}
-            />
-          ) : (
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                backgroundColor: colors.surfaceContainerLow,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <span
-                className={notoSerif.className}
-                style={{ fontSize: "8rem", color: colors.primaryContainer, fontWeight: 400, opacity: 0.4 }}
-              >
-                JS
-              </span>
-            </div>
-          )}
-        </div>
+        />
 
-        {/* Fondu DROIT */}
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, transparent 45%, #0a0906 75%)", pointerEvents: "none", zIndex: 5 }} />
-        {/* Fondu BAS */}
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 70%, #0a0906 100%)", pointerEvents: "none", zIndex: 5 }} />
-        {/* Fondu HAUT */}
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, #0a0906 0%, transparent 15%)", pointerEvents: "none", zIndex: 5 }} />
-        {/* Fondu GAUCHE */}
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, #0a0906 0%, transparent 8%)", pointerEvents: "none", zIndex: 5 }} />
-
-        {/* Contenu — right side */}
+        {/* Contenu texte */}
         <div
+          className="hero-content"
           style={{
             position: "absolute",
             right: 0,
-            top: 0,
-            width: "48%",
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            paddingLeft: "2rem",
-            paddingRight: "3rem",
-            overflow: "visible",
-            zIndex: 10,
+            top: "50%",
+            transform: "translateY(-50%)",
+            width: "45%",
+            padding: "0 3rem",
           }}
-          className="hero-content"
         >
-          <p
-            className={manrope.className}
-            style={{
-              fontSize: "0.65rem",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              color: colors.outline,
-              marginBottom: "1.5rem",
-              fontWeight: 600,
-            }}
-          >
+          <p style={{ fontSize: "0.75rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a84c", marginBottom: "1.5rem", fontWeight: 700 }}>
             Architecte Vocale &amp; Artiste
           </p>
 
           <h1
             style={{
               fontFamily: pinyon.style.fontFamily,
-              fontSize: "clamp(5rem, 10vw, 9rem)",
+              fontSize: "8rem",
               fontWeight: 400,
-              letterSpacing: "-0.02em",
               background: "linear-gradient(135deg, #c9a84c 0%, #e6c364 40%, #ffe090 55%, #c9a84c 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
-              lineHeight: 1.05,
-              marginBottom: "2rem",
-              display: "block",
+              lineHeight: 1,
+              margin: 0,
+              padding: 0,
               overflow: "visible",
+              display: "block",
             }}
           >
-            Joby
-            <br />
-            Smith
+            Joby Smith
           </h1>
 
-          <p
-            className={manrope.className}
-            style={{
-              fontSize: "0.95rem",
-              lineHeight: 1.8,
-              color: colors.onSurfaceVariant,
-              maxWidth: "440px",
-              marginBottom: "2.5rem",
-              fontWeight: 400,
-            }}
-          >
-            Une voix qui traverse la frontière entre l&apos;émouvant et le
-            profond. Joby Smith est une artiste vocale et architecte sonore
-            dédiée à la préservation de l&apos;individualité.
+          <p style={{ fontSize: "0.95rem", lineHeight: 1.8, color: "#d0c5b2", maxWidth: "440px", margin: "2.5rem 0" }}>
+            Une voix qui traverse la frontière entre l&apos;émouvant et le profond.
+            Joby Smith est une artiste vocale et architecte sonore dédiée à la
+            préservation de l&apos;individualité.
           </p>
 
-          <p
-            className={manrope.className}
-            style={{
-              fontSize: "0.85rem",
-              lineHeight: 1.8,
-              color: colors.outline,
-              maxWidth: "440px",
-              marginBottom: "3rem",
-              fontWeight: 400,
-            }}
-          >
+          <p style={{ fontSize: "0.85rem", lineHeight: 1.8, color: "#99907e", maxWidth: "440px", marginBottom: "2.5rem" }}>
             Avec 25 ans d&apos;expérience en composition, interprétation et
             transmission, elle propose des sessions de coaching vocal inégalées
             qui guident les artistes vers la maîtrise de leur instrument.
@@ -273,15 +175,7 @@ export default function JobySmithPage() {
           <Link
             href="/entrealm/joby-smith/coaching"
             className={notoSerif.className}
-            style={{
-              fontSize: "0.85rem",
-              color: "#c9a84c",
-              textDecoration: "underline",
-              textUnderlineOffset: "4px",
-              marginBottom: "2.5rem",
-              display: "inline-block",
-              transition: "opacity 0.3s ease",
-            }}
+            style={{ fontSize: "0.85rem", color: "#c9a84c", textDecoration: "underline", textUnderlineOffset: "4px", marginBottom: "2.5rem", display: "inline-block", transition: "opacity .3s" }}
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
           >
@@ -291,17 +185,7 @@ export default function JobySmithPage() {
           <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
             <Link
               href="/entrealm/booking?artist=joby-smith"
-              style={{
-                padding: "0.85rem 2.2rem",
-                background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryContainer})`,
-                color: colors.surface,
-                fontSize: "0.7rem",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                textDecoration: "none",
-                fontWeight: 700,
-                transition: "opacity 0.3s ease",
-              }}
+              style={{ padding: "0.85rem 2.2rem", background: "linear-gradient(135deg,#e6c364,#c9a84c)", color: "#0a0906", fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", fontWeight: 700, transition: "opacity .3s" }}
               onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.9")}
               onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
             >
@@ -309,117 +193,49 @@ export default function JobySmithPage() {
             </Link>
             <a
               href="#music"
-              style={{
-                padding: "0.85rem 2.2rem",
-                border: `1px solid rgba(230, 195, 100, 0.4)`,
-                color: colors.primary,
-                fontSize: "0.7rem",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                textDecoration: "none",
-                fontWeight: 600,
-                backgroundColor: "transparent",
-                transition: "all 0.3s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = colors.primary;
-                e.currentTarget.style.color = colors.surface;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "transparent";
-                e.currentTarget.style.color = colors.primary;
-              }}
+              style={{ padding: "0.85rem 2.2rem", border: "1px solid rgba(230,195,100,0.4)", color: "#e6c364", fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", fontWeight: 600, background: "transparent", transition: "all .3s" }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "#e6c364"; e.currentTarget.style.color = "#0a0906"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#e6c364"; }}
             >
               Voir le clip
             </a>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* ── PHILOSOPHY SECTION ── */}
+      {/* ── PHILOSOPHIE ── */}
       <section
+        className="philosophy-section"
         style={{
-          backgroundColor: "#0f0d0a",
+          background: "#0f0d0a",
           borderTop: "1px solid rgba(201,168,76,0.15)",
           borderBottom: "1px solid rgba(201,168,76,0.15)",
           padding: "5rem 3rem",
           display: "flex",
-          alignItems: "center",
           justifyContent: "center",
         }}
-        className="philosophy-section"
       >
-        <div
-          style={{
-            maxWidth: "700px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-          }}
-          className="philosophy-text"
-        >
-          <p
-            className={manrope.className}
-            style={{
-              fontSize: "0.65rem",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              color: colors.outline,
-              marginBottom: "1.5rem",
-              fontWeight: 600,
-            }}
-          >
+        <div style={{ maxWidth: "700px" }}>
+          <p style={{ fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#99907e", marginBottom: "1.5rem", fontWeight: 600 }}>
             Philosophie
           </p>
-
           <h2
             className={notoSerif.className}
-            style={{
-              fontSize: "clamp(1.8rem, 3vw, 2.8rem)",
-              fontWeight: 400,
-              letterSpacing: "-0.02em",
-              color: colors.onSurface,
-              lineHeight: 1.2,
-              marginBottom: "2rem",
-            }}
+            style={{ fontSize: "clamp(1.8rem,3vw,2.8rem)", fontWeight: 400, letterSpacing: "-0.02em", color: "#e7e2db", lineHeight: 1.2, marginBottom: "2rem" }}
           >
-            La Philosophie
-            <br />
-            du Son
+            La Philosophie<br />du Son
           </h2>
-
           <p
             className={notoSerif.className}
-            style={{
-              fontSize: "1.1rem",
-              lineHeight: 1.9,
-              color: colors.onSurfaceVariant,
-              fontStyle: "italic",
-              maxWidth: "480px",
-              marginBottom: "2rem",
-            }}
+            style={{ fontSize: "1.1rem", lineHeight: 1.9, color: "#d0c5b2", fontStyle: "italic", maxWidth: "480px", marginBottom: "2rem" }}
           >
             La musique ne s&apos;entend pas seulement ; elle s&apos;habite. Dans nos
             sessions, nous explorons le paysage physiologique et émotionnel de
             votre voix pour révéler un timbre qui n&apos;appartient qu&apos;à vous.
           </p>
-
           <Link
             href="/entrealm/joby-smith/music"
-            className={manrope.className}
-            style={{
-              display: "inline-block",
-              width: "fit-content",
-              fontSize: "0.65rem",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: colors.primary,
-              textDecoration: "none",
-              fontWeight: 600,
-              borderBottom: `1px solid ${colors.primary}`,
-              paddingBottom: "0.3rem",
-              transition: "opacity 0.3s ease",
-            }}
+            style={{ fontSize: "0.65rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#e6c364", textDecoration: "none", fontWeight: 600, borderBottom: "1px solid #e6c364", paddingBottom: "0.3rem", transition: "opacity .3s" }}
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
           >
@@ -428,50 +244,24 @@ export default function JobySmithPage() {
         </div>
       </section>
 
-      {/* ── MUSIC SECTION ── */}
+      {/* ── MUSIQUE ── */}
       <section
         id="music"
-        style={{
-          padding: "6rem 3rem",
-          backgroundColor: colors.surfaceContainerLow,
-        }}
         className="music-section"
+        style={{ padding: "6rem 3rem", background: "#1d1b17" }}
       >
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <p
-            className={manrope.className}
-            style={{
-              fontSize: "0.65rem",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              color: colors.outline,
-              marginBottom: "1rem",
-              fontWeight: 600,
-            }}
-          >
+          <p style={{ fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#99907e", marginBottom: "1rem", fontWeight: 600 }}>
             Écouter
           </p>
           <h2
             className={notoSerif.className}
-            style={{
-              fontSize: "clamp(2rem, 3.5vw, 3rem)",
-              fontWeight: 400,
-              letterSpacing: "-0.02em",
-              color: colors.onSurface,
-              marginBottom: "3rem",
-            }}
+            style={{ fontSize: "clamp(2rem,3.5vw,3rem)", fontWeight: 400, letterSpacing: "-0.02em", color: "#e7e2db", marginBottom: "3rem" }}
           >
             Titres Phares
           </h2>
 
-          {/* Audio player-style track list */}
-          <div
-            style={{
-              backgroundColor: `rgba(54, 53, 48, 0.6)`,
-              backdropFilter: "blur(30px)",
-              padding: "0",
-            }}
-          >
+          <div style={{ background: "rgba(54,53,48,0.6)", backdropFilter: "blur(30px)" }}>
             {TRACKS.map((t, i) => (
               <div
                 key={i}
@@ -480,78 +270,34 @@ export default function JobySmithPage() {
                   alignItems: "center",
                   justifyContent: "space-between",
                   padding: "1.5rem 2rem",
-                  backgroundColor: activeTrack === i ? colors.surfaceContainerHigh : "transparent",
+                  background: activeTrack === i ? "#2c2a25" : "transparent",
                   cursor: "pointer",
-                  transition: "background-color 0.3s ease",
+                  transition: "background .3s",
                 }}
                 onClick={() => setActiveTrack(activeTrack === i ? null : i)}
-                onMouseEnter={(e) => {
-                  if (activeTrack !== i) e.currentTarget.style.backgroundColor = colors.surfaceContainer;
-                }}
-                onMouseLeave={(e) => {
-                  if (activeTrack !== i) e.currentTarget.style.backgroundColor = "transparent";
-                }}
+                onMouseEnter={(e) => { if (activeTrack !== i) e.currentTarget.style.background = "#211f1b"; }}
+                onMouseLeave={(e) => { if (activeTrack !== i) e.currentTarget.style.background = "transparent"; }}
               >
                 <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
-                  <div
-                    style={{
-                      width: "36px",
-                      height: "36px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      border: `1px solid ${activeTrack === i ? colors.primary : colors.outlineVariant}`,
-                    }}
-                  >
-                    <span style={{ color: activeTrack === i ? colors.primary : colors.outline, fontSize: "0.7rem", marginLeft: "2px" }}>
+                  <div style={{ width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", border: `1px solid ${activeTrack === i ? "#e6c364" : "#4d4637"}` }}>
+                    <span style={{ color: activeTrack === i ? "#e6c364" : "#99907e", fontSize: "0.7rem", marginLeft: 2 }}>
                       {activeTrack === i ? "❚❚" : "▶"}
                     </span>
                   </div>
                   <div>
-                    <p
-                      className={notoSerif.className}
-                      style={{
-                        fontSize: "1.05rem",
-                        color: activeTrack === i ? colors.primary : colors.onSurface,
-                        fontWeight: 400,
-                      }}
-                    >
+                    <p className={notoSerif.className} style={{ fontSize: "1.05rem", color: activeTrack === i ? "#e6c364" : "#e7e2db" }}>
                       {t.title}
                     </p>
-                    <p
-                      className={manrope.className}
-                      style={{
-                        fontSize: "0.7rem",
-                        color: colors.outline,
-                        letterSpacing: "0.1em",
-                        textTransform: "uppercase",
-                        marginTop: "0.2rem",
-                        fontWeight: 500,
-                      }}
-                    >
+                    <p style={{ fontSize: "0.7rem", color: "#99907e", letterSpacing: "0.1em", textTransform: "uppercase", marginTop: "0.2rem", fontWeight: 500 }}>
                       Joby Smith
                     </p>
                   </div>
                 </div>
-
                 <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
-                  {/* Progress bar (visual only) */}
-                  <div style={{ width: "200px", height: "2px", backgroundColor: colors.outlineVariant, position: "relative" }} className="progress-bar">
-                    <div
-                      style={{
-                        width: activeTrack === i ? "35%" : "0%",
-                        height: "100%",
-                        backgroundColor: colors.primary,
-                        transition: "width 0.5s ease",
-                      }}
-                    />
+                  <div className="progress-bar" style={{ width: 200, height: 2, background: "#4d4637", position: "relative" }}>
+                    <div style={{ width: activeTrack === i ? "35%" : "0%", height: "100%", background: "#e6c364", transition: "width .5s" }} />
                   </div>
-                  <span
-                    className={manrope.className}
-                    style={{ fontSize: "0.8rem", color: colors.outline, fontWeight: 500, minWidth: "35px" }}
-                  >
-                    {t.duration}
-                  </span>
+                  <span style={{ fontSize: "0.8rem", color: "#99907e", fontWeight: 500, minWidth: 35 }}>{t.duration}</span>
                 </div>
               </div>
             ))}
@@ -561,105 +307,46 @@ export default function JobySmithPage() {
 
       {/* ── FOOTER ── */}
       <footer
-        style={{
-          padding: "3rem",
-          backgroundColor: colors.surface,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: "1rem",
-        }}
         className="footer"
+        style={{ padding: "3rem", background: "#0a0906", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}
       >
-        <a
-          href="/entrealm"
-          className={notoSerif.className}
-          style={{
-            fontSize: "0.8rem",
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            color: colors.outline,
-            textDecoration: "none",
-            fontWeight: 400,
-          }}
-        >
+        <a href="/entrealm" className={notoSerif.className} style={{ fontSize: "0.8rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#99907e", textDecoration: "none" }}>
           Entrealm
         </a>
-
-        <p
-          className={manrope.className}
-          style={{
-            fontSize: "0.7rem",
-            color: colors.outlineVariant,
-            fontWeight: 400,
-            letterSpacing: "0.05em",
-          }}
-        >
+        <p style={{ fontSize: "0.7rem", color: "#4d4637", letterSpacing: "0.05em" }}>
           © 2026 Joby Smith · Tous droits réservés
         </p>
-
         <div style={{ display: "flex", gap: "2rem" }}>
-          {[{ label: "Confidentialité", href: "privacy" }, { label: "Conditions", href: "terms" }, { label: "Contact", href: "contact" }].map((link) => (
+          {[
+            { label: "Confidentialité", href: "privacy" },
+            { label: "Conditions", href: "terms" },
+            { label: "Contact", href: "contact" },
+          ].map((l) => (
             <a
-              key={link.href}
-              href={`/entrealm/${link.href}`}
-              className={manrope.className}
-              style={{
-                fontSize: "0.65rem",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: colors.outline,
-                textDecoration: "none",
-                fontWeight: 500,
-                transition: "color 0.3s ease",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = colors.primary)}
-              onMouseLeave={(e) => (e.currentTarget.style.color = colors.outline)}
+              key={l.href}
+              href={`/entrealm/${l.href}`}
+              style={{ fontSize: "0.65rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#99907e", textDecoration: "none", fontWeight: 500, transition: "color .3s" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#e6c364")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "#99907e")}
             >
-              {link.label}
+              {l.label}
             </a>
           ))}
         </div>
       </footer>
 
-      {/* ── RESPONSIVE STYLES ── */}
+      {/* ── RESPONSIVE ── */}
       <style>{`
         @media (max-width: 768px) {
-          .nav-bar {
-            padding: 1rem 1.5rem !important;
-          }
-          .nav-links {
-            display: none !important;
-          }
-          .hero-section {
-            height: auto !important;
-            min-height: 100vh !important;
-          }
-          .hero-image-container {
-            width: 100% !important;
-            height: 50vh !important;
-          }
-          .hero-content {
-            position: relative !important;
-            width: 100% !important;
-            height: auto !important;
-            padding: 2.5rem 1.5rem 3rem !important;
-          }
-          .philosophy-section {
-            padding: 3rem 1.5rem !important;
-          }
-          .music-section {
-            padding: 4rem 1.5rem !important;
-          }
-          .progress-bar {
-            display: none !important;
-          }
-          .footer {
-            flex-direction: column !important;
-            align-items: flex-start !important;
-            padding: 2.5rem 1.5rem !important;
-          }
+          .nav-bar { padding: 1rem 1.5rem !important; }
+          .nav-links { display: none !important; }
+          .hero-section { height: auto !important; min-height: 100vh !important; overflow: visible !important; }
+          .hero-photo { position: relative !important; width: 100% !important; max-width: 100% !important; height: 50vh !important; }
+          .hero-content { position: relative !important; width: 100% !important; transform: none !important; top: auto !important; right: auto !important; padding: 2.5rem 1.5rem 3rem !important; }
+          .philosophy-section { padding: 3rem 1.5rem !important; }
+          .music-section { padding: 4rem 1.5rem !important; }
+          .progress-bar { display: none !important; }
+          .footer { flex-direction: column !important; align-items: flex-start !important; padding: 2.5rem 1.5rem !important; }
         }
       `}</style>
     </div>
