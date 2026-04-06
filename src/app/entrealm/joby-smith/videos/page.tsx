@@ -20,11 +20,11 @@ const manrope = Manrope({
 });
 
 const VIDEOS = [
-  { title: "Midnight Transcendence (Live)", duration: "4:32" },
-  { title: "Sankofa Sessions — Episode 1", duration: "12:14" },
-  { title: "Breathe (Clip officiel)", duration: "5:01" },
-  { title: "Masterclass : La Voix Comme Instrument", duration: "28:45" },
-  { title: "Joby Smith au Studio — Behind the Scenes", duration: "8:20" },
+  { title: "Midnight Transcendence (Live)", duration: "4:32", embedId: "dQw4w9WgXcQ" },
+  { title: "Sankofa Sessions — Episode 1", duration: "12:14", embedId: "dQw4w9WgXcQ" },
+  { title: "Breathe (Clip officiel)", duration: "5:01", embedId: "dQw4w9WgXcQ" },
+  { title: "Masterclass : La Voix Comme Instrument", duration: "28:45", embedId: "dQw4w9WgXcQ" },
+  { title: "Joby Smith au Studio — Behind the Scenes", duration: "8:20", embedId: "dQw4w9WgXcQ" },
 ];
 
 export default function VideosPage() {
@@ -138,30 +138,28 @@ export default function VideosPage() {
           {VIDEOS.map((v, i) => (
             <div
               key={i}
-              style={{
-                cursor: "pointer",
-                transition: "all .3s",
-              }}
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
             >
-              {/* Thumbnail */}
+              {/* iframe YouTube 16/9 */}
               <div
                 style={{
                   position: "relative",
-                  aspectRatio: "16/9",
-                  background: "#1d1b17",
+                  paddingBottom: "56.25%",
+                  height: 0,
+                  overflow: "hidden",
                   border: `1px solid ${hovered === i ? "#e6c364" : "#4d4637"}`,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
                   transition: "border-color .3s",
                   marginBottom: "1rem",
+                  background: "#1d1b17",
                 }}
               >
-                <span style={{ fontSize: "2.5rem", color: hovered === i ? "#ffe090" : "#e6c364", transition: "color .3s" }}>
-                  ▶
-                </span>
+                <iframe
+                  src={`https://www.youtube.com/embed/${v.embedId}`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
+                />
               </div>
               {/* Info */}
               <h3
