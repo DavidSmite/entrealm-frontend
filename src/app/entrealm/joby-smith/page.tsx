@@ -119,7 +119,7 @@ export default function JobySmithPage() {
             top: 0,
             height: "100%",
             width: "65%",
-            background: "linear-gradient(to right, transparent 50%, #0a0906 100%)",
+            background: "linear-gradient(to right, transparent 35%, #0a0906 85%)",
             pointerEvents: "none",
           }}
         />
@@ -140,7 +140,7 @@ export default function JobySmithPage() {
             Architecte Vocale &amp; Artiste
           </p>
 
-          <svg viewBox="0 0 800 220" width="100%" style={{ overflow: "visible", display: "block", marginBottom: "2rem" }}>
+          <svg viewBox="0 0 800 380" width="100%" style={{ overflow: "visible", display: "block", marginBottom: "2rem" }}>
             <defs>
               <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#c9a84c" />
@@ -150,15 +150,26 @@ export default function JobySmithPage() {
               </linearGradient>
             </defs>
             <text
-              x="0"
-              y="160"
+              x="20"
+              y="170"
               fontFamily={pinyon.style.fontFamily}
-              fontSize="160"
+              fontSize="170"
               fontWeight="400"
               fill="url(#goldGrad)"
               style={{ overflow: "visible" }}
             >
-              Joby Smith
+              Joby
+            </text>
+            <text
+              x="20"
+              y="330"
+              fontFamily={pinyon.style.fontFamily}
+              fontSize="170"
+              fontWeight="400"
+              fill="url(#goldGrad)"
+              style={{ overflow: "visible" }}
+            >
+              Smith
             </text>
           </svg>
 
