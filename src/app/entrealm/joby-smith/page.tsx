@@ -145,18 +145,23 @@ export default function JobySmithPage() {
               fontFamily: pinyon.style.fontFamily,
               fontSize: "8rem",
               fontWeight: 400,
-              background: "linear-gradient(135deg, #c9a84c 0%, #e6c364 40%, #ffe090 55%, #c9a84c 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              lineHeight: 1,
-              margin: 0,
-              padding: 0,
+              lineHeight: 1.3,
+              margin: "0 0 0 -0.15em",
+              padding: "0.1em 0 0.3em 0.2em",
               overflow: "visible",
               display: "block",
             }}
           >
-            Joby Smith
+            <span
+              style={{
+                background: "linear-gradient(135deg, #c9a84c 0%, #e6c364 40%, #ffe090 55%, #c9a84c 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              Joby Smith
+            </span>
           </h1>
 
           <p style={{ fontSize: "0.95rem", lineHeight: 1.8, color: "#d0c5b2", maxWidth: "440px", margin: "2.5rem 0" }}>
