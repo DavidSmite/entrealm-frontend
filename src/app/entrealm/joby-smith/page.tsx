@@ -128,7 +128,8 @@ export default function JobySmithPage() {
           position: "relative",
           width: "100%",
           height: "100vh",
-          overflow: "hidden",
+          overflow: "visible",
+          clipPath: "none",
           backgroundColor: colors.surface,
         }}
         className="hero-section"
@@ -141,6 +142,7 @@ export default function JobySmithPage() {
             top: 0,
             width: "55%",
             height: "100%",
+            overflow: "hidden",
           }}
           className="hero-image-container"
         >
