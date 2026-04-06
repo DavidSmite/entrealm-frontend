@@ -126,28 +126,21 @@ export default function JobySmithPage() {
       <section
         style={{
           position: "relative",
-          minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          padding: "8rem 3rem 4rem",
-          backgroundColor: colors.surface,
+          width: "100%",
+          height: "100vh",
           overflow: "hidden",
+          backgroundColor: colors.surface,
         }}
         className="hero-section"
       >
-        {/* Hero photo — left side */}
+        {/* Photo — left side */}
         <div
           style={{
             position: "absolute",
-            top: 0,
             left: 0,
-            width: "50%",
+            top: 0,
+            width: "55%",
             height: "100%",
-            overflow: "hidden",
-            maskImage: "linear-gradient(to right, black 55%, transparent 95%), linear-gradient(to bottom, black 75%, transparent 100%)",
-            WebkitMaskImage: "linear-gradient(to right, black 55%, transparent 95%), linear-gradient(to bottom, black 75%, transparent 100%)",
-            maskComposite: "intersect",
-            WebkitMaskComposite: "source-in",
           }}
           className="hero-image-container"
         >
@@ -157,7 +150,7 @@ export default function JobySmithPage() {
               alt="Joby Smith"
               fill
               priority
-              style={{ objectFit: "cover", objectPosition: "center" }}
+              style={{ objectFit: "cover", objectPosition: "center top" }}
               onError={() => setImgError(true)}
             />
           ) : (
@@ -179,17 +172,40 @@ export default function JobySmithPage() {
               </span>
             </div>
           )}
+          {/* Fondu droit */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: `linear-gradient(to right, transparent 50%, ${colors.surface} 100%)`,
+              pointerEvents: "none",
+            }}
+          />
+          {/* Fondu bas */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: `linear-gradient(to bottom, transparent 75%, ${colors.surface} 100%)`,
+              pointerEvents: "none",
+            }}
+          />
         </div>
 
-        {/* Hero content — right side */}
+        {/* Contenu — right side */}
         <div
           style={{
-            position: "relative",
-            marginLeft: "auto",
-            width: "45%",
-            maxWidth: "600px",
-            zIndex: 10,
-            overflowX: "visible",
+            position: "absolute",
+            right: 0,
+            top: 0,
+            width: "48%",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            paddingLeft: "2rem",
+            paddingRight: "3rem",
+            overflow: "visible",
           }}
           className="hero-content"
         >
@@ -219,7 +235,7 @@ export default function JobySmithPage() {
               backgroundClip: "text",
               lineHeight: 1.05,
               marginBottom: "2rem",
-              paddingLeft: "1rem",
+              display: "block",
               overflow: "visible",
             }}
           >
@@ -623,20 +639,18 @@ export default function JobySmithPage() {
             display: none !important;
           }
           .hero-section {
-            flex-direction: column !important;
-            padding: 0 !important;
-            min-height: auto !important;
+            height: auto !important;
+            min-height: 100vh !important;
           }
           .hero-image-container {
-            position: relative !important;
             width: 100% !important;
-            height: 60vh !important;
+            height: 50vh !important;
           }
           .hero-content {
+            position: relative !important;
             width: 100% !important;
-            margin-left: 0 !important;
+            height: auto !important;
             padding: 2.5rem 1.5rem 3rem !important;
-            max-width: 100% !important;
           }
           .philosophy-section {
             padding: 3rem 1.5rem !important;
