@@ -140,29 +140,27 @@ export default function JobySmithPage() {
             Architecte Vocale &amp; Artiste
           </p>
 
-          <h1
-            style={{
-              fontFamily: pinyon.style.fontFamily,
-              fontSize: "8rem",
-              fontWeight: 400,
-              lineHeight: 1.3,
-              margin: "0 0 0 -0.15em",
-              padding: "0.1em 0 0.3em 0.2em",
-              overflow: "visible",
-              display: "block",
-            }}
-          >
-            <span
-              style={{
-                background: "linear-gradient(135deg, #c9a84c 0%, #e6c364 40%, #ffe090 55%, #c9a84c 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
+          <svg viewBox="0 0 800 220" width="100%" style={{ overflow: "visible", display: "block", marginBottom: "2rem" }}>
+            <defs>
+              <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#c9a84c" />
+                <stop offset="40%" stopColor="#e6c364" />
+                <stop offset="55%" stopColor="#ffe090" />
+                <stop offset="100%" stopColor="#c9a84c" />
+              </linearGradient>
+            </defs>
+            <text
+              x="0"
+              y="160"
+              fontFamily={pinyon.style.fontFamily}
+              fontSize="160"
+              fontWeight="400"
+              fill="url(#goldGrad)"
+              style={{ overflow: "visible" }}
             >
               Joby Smith
-            </span>
-          </h1>
+            </text>
+          </svg>
 
           <p style={{ fontSize: "0.95rem", lineHeight: 1.8, color: "#d0c5b2", maxWidth: "440px", margin: "2.5rem 0" }}>
             Une voix qui traverse la frontière entre l&apos;émouvant et le profond.
