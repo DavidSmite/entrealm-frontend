@@ -37,15 +37,21 @@ function BookingContent() {
   const artist = ARTISTS[artistId];
   const [loading, setLoading] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [customerName, setCustomerName] = useState("");
+  const [customerEmail, setCustomerEmail] = useState("");
 
-  async function handleCheckout(slug: string, amount: number) {
+  async function handleCheckout(slug: string) {
+    if (!customerName.trim() || !customerEmail.trim()) {
+      setError("Veuillez remplir votre nom et email");
+      return;
+    }
     setLoading(slug);
     setError(null);
     try {
       const res = await fetch(`${API}/api/entrealm/checkout`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ artistId, serviceSlug: slug, amount }),
+        body: JSON.stringify({ artistSlug: artistId, serviceId: slug, customerName: customerName.trim(), customerEmail: customerEmail.trim() }),
       });
       if (!res.ok) throw new Error(`Erreur ${res.status}`);
       const data = await res.json();
@@ -154,8 +160,26 @@ function BookingContent() {
         </p>
       </section>
 
+      {/* ── FORMULAIRE ── */}
+      <section style={{ padding: "0 3rem 2rem", maxWidth: "900px", margin: "0 auto" }}>
+        <input
+          type="text"
+          placeholder="Votre nom complet"
+          value={customerName}
+          onChange={(e) => setCustomerName(e.target.value)}
+          style={{ background: "#1d1b17", border: "1px solid #4d4637", color: "#e7e2db", padding: "0.75rem 1rem", width: "100%", marginBottom: "1rem", fontSize: "0.9rem", outline: "none" }}
+        />
+        <input
+          type="email"
+          placeholder="Votre adresse email"
+          value={customerEmail}
+          onChange={(e) => setCustomerEmail(e.target.value)}
+          style={{ background: "#1d1b17", border: "1px solid #4d4637", color: "#e7e2db", padding: "0.75rem 1rem", width: "100%", marginBottom: "1rem", fontSize: "0.9rem", outline: "none" }}
+        />
+      </section>
+
       {/* ── SERVICES ── */}
-      <section style={{ padding: "2rem 3rem 5rem", maxWidth: "900px", margin: "0 auto" }}>
+      <section style={{ padding: "0 3rem 5rem", maxWidth: "900px", margin: "0 auto" }}>
         {error && (
           <div style={{ padding: "1rem", marginBottom: "2rem", background: "rgba(255,180,171,0.1)", border: "1px solid rgba(255,180,171,0.3)", color: "#ffb4ab", fontSize: "0.85rem" }}>
             {error}
@@ -212,7 +236,7 @@ function BookingContent() {
                     </a>
                   ) : (
                     <button
-                      onClick={() => handleCheckout(s.slug, s.amount)}
+                      onClick={() => handleCheckout(s.slug)}
                       disabled={loading === s.slug}
                       style={{
                         padding: "0.65rem 1.8rem",
