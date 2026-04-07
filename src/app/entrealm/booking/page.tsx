@@ -42,7 +42,7 @@ function BookingContent() {
     setLoading(slug);
     setError(null);
     try {
-      const res = await fetch(`${API}/api/entrealm/create-checkout`, {
+      const res = await fetch(`${API}/api/entrealm/checkout`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ artistId, serviceSlug: slug, amount }),
