@@ -164,7 +164,6 @@ export default function CoachingPage() {
             borderRadius: "50%",
             overflow: "hidden",
             flexShrink: 0,
-            position: "relative",
           }}
           className="coaching-photo"
         >
