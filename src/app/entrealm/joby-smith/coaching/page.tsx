@@ -250,10 +250,34 @@ export default function CoachingPage() {
         style={{
           padding: "5rem 3rem",
           backgroundColor: colors.surfaceContainerLow,
+          position: "relative",
+          overflow: "hidden",
         }}
         className="services-section"
       >
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+        {/* Filigrane piano */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 0,
+            backgroundImage: "url('/piano-salon.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: 0.08,
+          }}
+        />
+        {/* Overlay fondu haut/bas */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 1,
+            background: "linear-gradient(to bottom, #1d1b17 0%, transparent 20%, transparent 80%, #1d1b17 100%)",
+            pointerEvents: "none",
+          }}
+        />
+        <div style={{ maxWidth: "1100px", margin: "0 auto", position: "relative", zIndex: 2 }}>
           <p
             className={manrope.className}
             style={{
