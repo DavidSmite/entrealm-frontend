@@ -271,8 +271,9 @@ export default function MusicPage() {
         </section>
 
         {/* Tracklist & Grid Layout */}
-        <section style={{ padding: "6rem 3rem", backgroundColor: "#0f0e0a" }}>
-          <div style={{ maxWidth: "80rem", margin: "0 auto", display: "grid", gridTemplateColumns: "2fr 1fr", gap: "4rem" }} className="tracklist-grid">
+        <section style={{ padding: "6rem 3rem", backgroundColor: "#0f0e0a", position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", inset: 0, zIndex: 0, backgroundImage: "url('/piano-salon2.png')", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.2 }} />
+          <div style={{ maxWidth: "80rem", margin: "0 auto", display: "grid", gridTemplateColumns: "2fr 1fr", gap: "4rem", position: "relative", zIndex: 1 }} className="tracklist-grid">
 
             {/* Main Tracklist */}
             <div>

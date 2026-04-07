@@ -218,9 +218,12 @@ export default function JobySmithPage() {
           padding: "5rem 3rem",
           display: "flex",
           justifyContent: "center",
+          position: "relative",
+          overflow: "hidden",
         }}
       >
-        <div style={{ maxWidth: "700px" }}>
+        <div style={{ position: "absolute", inset: 0, zIndex: 0, backgroundImage: "url('/joby-scene.png')", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.2 }} />
+        <div style={{ maxWidth: "700px", position: "relative", zIndex: 1 }}>
           <p style={{ fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#99907e", marginBottom: "1.5rem", fontWeight: 600 }}>
             Philosophie
           </p>

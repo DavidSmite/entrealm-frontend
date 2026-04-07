@@ -147,14 +147,20 @@ export default function CoachingPage() {
           display: "flex",
           alignItems: "center",
           gap: "3rem",
+          position: "relative",
+          overflow: "hidden",
         }}
         className="coaching-hero"
       >
+        {/* Filigrane hero */}
+        <div style={{ position: "absolute", inset: 0, zIndex: 0, backgroundImage: "url('/joby-piano.png')", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.2 }} />
         {/* Photo ronde */}
         <div
           style={{
             width: "200px",
             height: "200px",
+            position: "relative",
+            zIndex: 1,
             borderRadius: "50%",
             overflow: "hidden",
             flexShrink: 0,
@@ -193,7 +199,7 @@ export default function CoachingPage() {
         </div>
 
         {/* Titre */}
-        <div>
+        <div style={{ position: "relative", zIndex: 1 }}>
           <h1
             style={{
               fontFamily: pinyon.style.fontFamily,
@@ -261,10 +267,10 @@ export default function CoachingPage() {
             position: "absolute",
             inset: 0,
             zIndex: 0,
-            backgroundImage: "url('/piano-salon.jpg')",
+            backgroundImage: "url('/piano-salon2.png')",
             backgroundSize: "cover",
             backgroundPosition: "center",
-            opacity: 0.15,
+            opacity: 0.2,
           }}
         />
         {/* Overlay fondu haut/bas */}
