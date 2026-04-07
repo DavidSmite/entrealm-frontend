@@ -264,7 +264,7 @@ export default function CoachingPage() {
             backgroundImage: "url('/piano-salon.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
-            opacity: 0.08,
+            opacity: 0.15,
           }}
         />
         {/* Overlay fondu haut/bas */}
