@@ -347,6 +347,11 @@ export default function InscriptionPage() {
                   </label>
                 ))}
               </div>
+              {form.offre === "ambassadeur" && (
+                <p style={{ color: "#999", fontSize: "0.78rem", fontStyle: "italic", marginTop: "0.5rem", lineHeight: 1.6 }}>
+                  Abonnement offert sur invitation — commission standard applicable sur les reservations et ventes (8% VITRINE / 10% SCENE)
+                </p>
+              )}
             </div>
 
             {/* Code d'invitation (si ambassadeur) */}
@@ -472,9 +477,12 @@ export default function InscriptionPage() {
             <p style={{ color: "#999", fontSize: "0.88rem", marginBottom: "1.2rem", fontStyle: "italic" }}>
               La chorale fondee par Joby Smith — entre Paris et Londres
             </p>
-            <p style={{ color: "#ccc", fontSize: "0.88rem", lineHeight: 1.7 }}>
+            <p style={{ color: "#ccc", fontSize: "0.88rem", lineHeight: 1.7, marginBottom: "1rem" }}>
               Les membres de Sankofa Unit beneficient d&apos;un acces Ambassadeur offert.
               Utilisez votre code d&apos;invitation pour rejoindre ENTREALM ART gratuitement.
+            </p>
+            <p style={{ color: "#999", fontSize: "0.78rem", fontStyle: "italic", lineHeight: 1.6 }}>
+              L&apos;abonnement est offert — les commissions sur reservations et ventes restent applicables dans les conditions standard.
             </p>
           </div>
         </FadeIn>
