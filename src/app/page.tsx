@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Noto_Serif, Manrope } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import { QRCodeSVG } from "qrcode.react";
 
 const notoSerif = Noto_Serif({
   subsets: ["latin"],
@@ -274,12 +275,18 @@ export default function HomePage() {
               borderRadius: "8px",
             }}
           >
-            <Image
-              src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://entrealmart.com/entrealm/joby-smith"
-              alt="QR Code — Joby Smith"
-              width={160}
-              height={160}
-              unoptimized
+            <QRCodeSVG
+              value="https://entrealmart.com/entrealm/joby-smith"
+              size={200}
+              bgColor="#0a0906"
+              fgColor="#e6c364"
+              level="H"
+              imageSettings={{
+                src: "/logo-e.svg",
+                height: 40,
+                width: 40,
+                excavate: true,
+              }}
               style={{ display: "block", margin: "0 auto 1rem" }}
             />
             <p style={{ color: "#777", fontSize: "0.8rem", letterSpacing: "0.04em" }}>
