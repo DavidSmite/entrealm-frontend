@@ -51,6 +51,36 @@ export default function HomePage() {
       className={manrope.className}
       style={{ backgroundColor: "#0a0906", color: "#f5ede0", minHeight: "100vh" }}
     >
+      {/* Nav */}
+      <nav
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          padding: "1.5rem 2rem 0",
+        }}
+      >
+        <Link
+          href="/tarifs"
+          style={{
+            color: "#e6c364",
+            fontSize: "0.8rem",
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            textDecoration: "none",
+            borderBottom: "1px solid transparent",
+            transition: "border-color 0.3s ease",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderBottomColor = "#e6c364";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderBottomColor = "transparent";
+          }}
+        >
+          Tarifs
+        </Link>
+      </nav>
+
       {/* Hero */}
       <section
         style={{
@@ -58,8 +88,8 @@ export default function HomePage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          minHeight: "60vh",
-          padding: "4rem 1.5rem 2rem",
+          minHeight: "55vh",
+          padding: "2rem 1.5rem 2rem",
           textAlign: "center",
         }}
       >
