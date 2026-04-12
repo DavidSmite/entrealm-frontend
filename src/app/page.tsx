@@ -56,6 +56,7 @@ export default function HomePage() {
         style={{
           display: "flex",
           justifyContent: "flex-end",
+          gap: "2rem",
           padding: "1.5rem 2rem 0",
         }}
       >
@@ -78,6 +79,26 @@ export default function HomePage() {
           }}
         >
           Tarifs
+        </Link>
+        <Link
+          href="/inscription"
+          style={{
+            color: "#e6c364",
+            fontSize: "0.8rem",
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
+            textDecoration: "none",
+            borderBottom: "1px solid transparent",
+            transition: "border-color 0.3s ease",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderBottomColor = "#e6c364";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderBottomColor = "transparent";
+          }}
+        >
+          S&apos;inscrire
         </Link>
       </nav>
 
