@@ -2,6 +2,7 @@
 
 import { Cormorant_Garamond, Cinzel } from "next/font/google";
 import { useState } from "react";
+import Image from "next/image";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -110,6 +111,16 @@ export default function EntrealmHomePage() {
         color: "#f5ede0",
       }}
     >
+      {/* Logo */}
+      <Image
+        src="/logo-entrealm-art.png"
+        alt="ENTREALM ART"
+        width={200}
+        height={200}
+        priority
+        style={{ display: "block", margin: "2rem auto 0" }}
+      />
+
       {/* ═══════ SECTION 1 — HERO ═══════ */}
       <section
         style={{
