@@ -45,82 +45,6 @@ function FadeIn({
   );
 }
 
-function EntrealmLogo() {
-  return (
-    <svg
-      viewBox="0 0 400 80"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{ width: "320px", height: "auto" }}
-    >
-      {/* Portail */}
-      <path
-        d="M40 10 C40 10, 15 20, 15 45 C15 62, 25 70, 40 70 C55 70, 65 62, 65 45 C65 20, 40 10, 40 10Z"
-        stroke="#e6c364"
-        strokeWidth="1.5"
-        fill="none"
-      />
-      {/* Onde sonore gauche */}
-      <path
-        d="M22 35 C18 40, 18 50, 22 55"
-        stroke="#e6c364"
-        strokeWidth="1"
-        fill="none"
-        opacity="0.6"
-      />
-      <path
-        d="M14 30 C8 38, 8 52, 14 60"
-        stroke="#e6c364"
-        strokeWidth="1"
-        fill="none"
-        opacity="0.35"
-      />
-      {/* Onde sonore droite */}
-      <path
-        d="M58 35 C62 40, 62 50, 58 55"
-        stroke="#e6c364"
-        strokeWidth="1"
-        fill="none"
-        opacity="0.6"
-      />
-      <path
-        d="M66 30 C72 38, 72 52, 66 60"
-        stroke="#e6c364"
-        strokeWidth="1"
-        fill="none"
-        opacity="0.35"
-      />
-      {/* Etoile */}
-      <circle cx="40" cy="38" r="2.5" fill="#e6c364" />
-      <line x1="40" y1="32" x2="40" y2="44" stroke="#e6c364" strokeWidth="0.8" opacity="0.5" />
-      <line x1="34" y1="38" x2="46" y2="38" stroke="#e6c364" strokeWidth="0.8" opacity="0.5" />
-      {/* Texte ENTREALM ART */}
-      <text
-        x="90"
-        y="48"
-        fill="#e6c364"
-        fontFamily="serif"
-        fontSize="28"
-        letterSpacing="0.15em"
-        fontWeight="400"
-      >
-        ENTREALM
-      </text>
-      <text
-        x="320"
-        y="48"
-        fill="#e6c364"
-        fontFamily="serif"
-        fontSize="28"
-        letterSpacing="0.2em"
-        fontWeight="700"
-      >
-        ART
-      </text>
-    </svg>
-  );
-}
-
 export default function HomePage() {
   return (
     <div
@@ -140,7 +64,14 @@ export default function HomePage() {
         }}
       >
         <FadeIn delay={100}>
-          <EntrealmLogo />
+          <Image
+            src="/logo-entrealm-art.png"
+            alt="ENTREALM ART"
+            width={320}
+            height={320}
+            style={{ margin: "0 auto 2rem", display: "block" }}
+            priority
+          />
         </FadeIn>
 
         <FadeIn delay={400}>
