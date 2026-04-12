@@ -115,8 +115,8 @@ export default function EntrealmHomePage() {
       <Image
         src="/logo-entrealm-art.png"
         alt="ENTREALM ART"
-        width={200}
-        height={200}
+        width={420}
+        height={420}
         priority
         style={{ display: "block", margin: "2rem auto 0" }}
       />
@@ -135,19 +135,6 @@ export default function EntrealmHomePage() {
           boxShadow: "inset 0 0 120px rgba(201,168,76,0.04)",
         }}
       >
-        <p
-          className={cinzel.className}
-          style={{
-            fontSize: "0.7rem",
-            letterSpacing: "0.35em",
-            textTransform: "uppercase",
-            color: "#c9a84c",
-            marginBottom: "2rem",
-          }}
-        >
-          ENTREALM
-        </p>
-
         <h1
           className={cinzel.className}
           style={{
