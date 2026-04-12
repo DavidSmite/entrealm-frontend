@@ -359,9 +359,33 @@ export default function JobySmithPage() {
         @media (max-width: 768px) {
           .nav-bar { padding: 1rem 1.5rem !important; }
           .nav-links { display: none !important; }
-          .hero-section { height: auto !important; min-height: 100vh !important; overflow: visible !important; }
-          .hero-photo { position: relative !important; width: 100% !important; max-width: 100% !important; height: 50vh !important; }
-          .hero-content { position: relative !important; width: 100% !important; transform: none !important; top: auto !important; right: auto !important; padding: 2.5rem 1.5rem 3rem !important; }
+          .hero-section {
+            height: auto !important;
+            min-height: auto !important;
+            display: flex !important;
+            flex-direction: column !important;
+          }
+          .hero-photo {
+            position: relative !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            height: auto !important;
+            aspect-ratio: 3/4;
+            object-position: center top !important;
+          }
+          .hero-section > div:nth-child(2) {
+            display: none !important;
+          }
+          .hero-content {
+            position: relative !important;
+            width: 100% !important;
+            transform: none !important;
+            top: auto !important;
+            right: auto !important;
+            padding: 2.5rem 1.5rem 3rem !important;
+          }
+          .hero-content svg { max-width: 280px; }
+          .hero-content p { max-width: 100% !important; }
           .philosophy-section { padding: 3rem 1.5rem !important; }
           .music-section { padding: 4rem 1.5rem !important; }
           .progress-bar { display: none !important; }
