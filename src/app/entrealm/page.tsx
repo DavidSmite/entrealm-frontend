@@ -118,7 +118,7 @@ export default function EntrealmHomePage() {
         width={420}
         height={420}
         priority
-        style={{ display: "block", margin: "2rem auto 0" }}
+        style={{ display: "block", margin: "4rem auto 0" }}
       />
 
       {/* ═══════ SECTION 1 — HERO ═══════ */}
