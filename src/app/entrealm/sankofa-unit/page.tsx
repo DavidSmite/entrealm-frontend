@@ -164,14 +164,16 @@ export default function SankofaUnitPage() {
         }}
       >
         <FadeIn delay={100}>
-          <Image
-            src="/sankofa-logo-or.png"
-            alt="Sankofa Unit"
-            width={300}
-            height={300}
-            priority
-            style={{ display: "block", margin: "0 auto 2.5rem" }}
-          />
+          <div style={{ overflow: "visible" }}>
+            <Image
+              src="/sankofa-logo-or.png"
+              alt="Sankofa Unit"
+              width={300}
+              height={300}
+              priority
+              style={{ display: "block", margin: "2rem auto 0", paddingBottom: "2rem" }}
+            />
+          </div>
         </FadeIn>
 
         <FadeIn delay={300}>
