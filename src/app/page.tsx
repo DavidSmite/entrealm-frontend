@@ -116,7 +116,7 @@ export default function HomePage() {
       >
         <FadeIn delay={100}>
           <Image
-            src="/logo-entrealm-art.png"
+            src="/logo_entrealm_art.png"
             alt="ENTREALM ART"
             width={320}
             height={320}
