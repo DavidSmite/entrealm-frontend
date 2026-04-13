@@ -120,7 +120,7 @@ export default function HomePage() {
             alt="ENTREALM ART"
             width={320}
             height={320}
-            style={{ margin: "0 auto 2rem", display: "block" }}
+            style={{ display: "block", margin: "2rem auto 0", background: "#0a0906" }}
             priority
           />
         </FadeIn>
