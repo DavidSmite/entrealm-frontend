@@ -44,13 +44,60 @@ function FadeIn({
   );
 }
 
+const SvgTrophy = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e6c364" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6 9H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3" />
+    <path d="M18 9h3a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-3" />
+    <path d="M6 4h12v6a6 6 0 0 1-12 0V4z" />
+    <path d="M9 20h6" />
+    <path d="M12 16v4" />
+  </svg>
+);
+
+const SvgStar = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e6c364" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+  </svg>
+);
+
+const SvgTv = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e6c364" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="7" width="20" height="13" rx="2" />
+    <polyline points="17 2 12 7 7 2" />
+  </svg>
+);
+
+const SvgMusic = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e6c364" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9 18V5l12-2v13" />
+    <circle cx="6" cy="18" r="3" />
+    <circle cx="18" cy="16" r="3" />
+  </svg>
+);
+
+const SvgTheater = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e6c364" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <path d="M8 9.05v-.1" />
+    <path d="M16 9.05v-.1" />
+    <path d="M16 15c-.8 1-2.2 2-4 2s-3.2-1-4-2" />
+  </svg>
+);
+
+const SvgDisc = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e6c364" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <circle cx="12" cy="12" r="3" />
+  </svg>
+);
+
 const PALMARES = [
-  { icon: "\uD83C\uDFC6", title: "Incroyable Talent 2012", desc: "Demi-finaliste" },
-  { icon: "\uD83C\uDF84", title: "Noel de l'Elysee 2012", desc: "" },
-  { icon: "\uD83D\uDCFA", title: "The Voice, Taratata, Les 300 Choeurs", desc: "Depuis 2014" },
-  { icon: "\uD83C\uDFB5", title: "Tournee Shaka Ponk", desc: "16 choristes sur scene" },
-  { icon: "\uD83C\uDFAD", title: "Premiere partie Chimene Badi", desc: "Folies Bergeres" },
-  { icon: "\uD83D\uDCBF", title: "Albums Ibrahim Maalouf, Clara Luciani", desc: "" },
+  { icon: <SvgTrophy />, title: "Incroyable Talent 2012", desc: "Demi-finaliste" },
+  { icon: <SvgStar />, title: "Noel de l'Elysee 2012", desc: "" },
+  { icon: <SvgTv />, title: "The Voice, Taratata, Les 300 Choeurs", desc: "Depuis 2014" },
+  { icon: <SvgMusic />, title: "Tournee Shaka Ponk", desc: "16 choristes sur scene" },
+  { icon: <SvgTheater />, title: "Premiere partie Chimene Badi", desc: "Folies Bergeres" },
+  { icon: <SvgDisc />, title: "Albums Ibrahim Maalouf, Clara Luciani", desc: "" },
 ];
 
 const SERVICES = [
@@ -329,7 +376,7 @@ export default function SankofaUnitPage() {
                     borderRadius: "4px",
                   }}
                 >
-                  <span style={{ fontSize: "1.4rem", marginRight: "0.75rem" }}>{p.icon}</span>
+                  <span style={{ display: "inline-flex", verticalAlign: "middle", marginRight: "0.75rem" }}>{p.icon}</span>
                   <span style={{ color: "#f5ede0", fontSize: "0.9rem", fontWeight: 700 }}>
                     {p.title}
                   </span>

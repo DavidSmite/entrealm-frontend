@@ -15,19 +15,43 @@ const cinzel = Cinzel({
   weight: ["400", "700"],
 });
 
+const IconEye = () => (
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#e6c364" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+    <circle cx="12" cy="12" r="3" />
+  </svg>
+);
+
+const IconCalendar = () => (
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#e6c364" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2" />
+    <line x1="16" y1="2" x2="16" y2="6" />
+    <line x1="8" y1="2" x2="8" y2="6" />
+    <line x1="3" y1="10" x2="21" y2="10" />
+  </svg>
+);
+
+const IconEuro = () => (
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#e6c364" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17.2 7A7 7 0 0 0 7.2 12a7 7 0 0 0 10 5" />
+    <line x1="4" y1="10" x2="13" y2="10" />
+    <line x1="4" y1="14" x2="13" y2="14" />
+  </svg>
+);
+
 const VALUES = [
   {
-    icon: "\uD83C\uDFAF",
+    icon: <IconEye />,
     title: "Visibilité",
     text: "Une page artiste professionnelle, votre vitrine permanente",
   },
   {
-    icon: "\uD83D\uDCC5",
+    icon: <IconCalendar />,
     title: "Réservations",
     text: "Gérez vos prestations et encaissez en ligne, sans friction",
   },
   {
-    icon: "\uD83D\uDCB0",
+    icon: <IconEuro />,
     title: "Revenus",
     text: "Fixez vos tarifs, ENTREALM s\u2019occupe du reste (commission 15\u00A0%)",
   },
@@ -176,6 +200,9 @@ export default function EntrealmHomePage() {
           </GoldButton>
           <GoldButton href="/entrealm/joby-smith" outline>
             Découvrir Joby Smith
+          </GoldButton>
+          <GoldButton href="/entrealm/sankofa-unit" outline>
+            Découvrir Sankofa Unit
           </GoldButton>
         </div>
       </section>
