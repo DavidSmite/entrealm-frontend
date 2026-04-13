@@ -168,10 +168,18 @@ export default function SankofaUnitPage() {
             <Image
               src="/sankofa-logo-or.png"
               alt="Sankofa Unit"
-              width={300}
-              height={380}
+              width={400}
+              height={450}
               priority
-              style={{ display: "block", margin: "2rem auto 0", paddingBottom: "2rem" }}
+              unoptimized
+              style={{
+                display: "block",
+                margin: "2rem auto 0",
+                objectFit: "contain",
+                width: "400px",
+                height: "auto",
+                maxWidth: "90vw",
+              }}
             />
           </div>
         </FadeIn>
