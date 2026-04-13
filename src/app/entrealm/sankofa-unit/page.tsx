@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Noto_Serif, Manrope } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import { QRCodeSVG } from "qrcode.react";
 
 const notoSerif = Noto_Serif({
   subsets: ["latin"],
@@ -537,6 +538,43 @@ export default function SankofaUnitPage() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* ── QR CODE ── */}
+      <section
+        style={{
+          textAlign: "center",
+          padding: "2rem 1.5rem 3rem",
+        }}
+      >
+        <FadeIn delay={200}>
+          <div
+            style={{
+              display: "inline-block",
+              padding: "1.5rem",
+              border: "1px solid rgba(230, 195, 100, 0.15)",
+              borderRadius: "8px",
+            }}
+          >
+            <QRCodeSVG
+              value="https://entrealmart.com/entrealm/sankofa-unit"
+              size={200}
+              bgColor="#0a0906"
+              fgColor="#e6c364"
+              level="H"
+              imageSettings={{
+                src: "/logo-e.svg",
+                height: 40,
+                width: 40,
+                excavate: true,
+              }}
+              style={{ display: "block", margin: "0 auto 1rem" }}
+            />
+            <p style={{ color: "#777", fontSize: "0.8rem", letterSpacing: "0.04em" }}>
+              Scanner pour accéder à Sankofa Unit
+            </p>
+          </div>
+        </FadeIn>
       </section>
 
       {/* ── RESEAUX SOCIAUX + FOOTER ── */}

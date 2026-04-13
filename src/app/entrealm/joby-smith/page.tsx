@@ -3,6 +3,7 @@
 import { Pinyon_Script, Noto_Serif, Manrope } from "next/font/google";
 import { useState } from "react";
 import Link from "next/link";
+import { QRCodeSVG } from "qrcode.react";
 
 const pinyon = Pinyon_Script({
   subsets: ["latin"],
@@ -321,6 +322,41 @@ export default function JobySmithPage() {
               Voir les vidéos →
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* ── QR CODE ── */}
+      <section
+        style={{
+          textAlign: "center",
+          padding: "2rem 1.5rem 3rem",
+        }}
+      >
+        <div
+          style={{
+            display: "inline-block",
+            padding: "1.5rem",
+            border: "1px solid rgba(230, 195, 100, 0.15)",
+            borderRadius: "8px",
+          }}
+        >
+          <QRCodeSVG
+            value="https://entrealmart.com/entrealm/joby-smith"
+            size={200}
+            bgColor="#0a0906"
+            fgColor="#e6c364"
+            level="H"
+            imageSettings={{
+              src: "/logo-e.svg",
+              height: 40,
+              width: 40,
+              excavate: true,
+            }}
+            style={{ display: "block", margin: "0 auto 1rem" }}
+          />
+          <p style={{ color: "#777", fontSize: "0.8rem", letterSpacing: "0.04em" }}>
+            Scanner pour accéder à l&apos;univers de Joby Smith
+          </p>
         </div>
       </section>
 
