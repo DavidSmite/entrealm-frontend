@@ -169,7 +169,7 @@ export default function SankofaUnitPage() {
               src="/sankofa-logo-or.png"
               alt="Sankofa Unit"
               width={300}
-              height={300}
+              height={380}
               priority
               style={{ display: "block", margin: "2rem auto 0", paddingBottom: "2rem" }}
             />
