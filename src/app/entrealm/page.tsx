@@ -135,6 +135,50 @@ export default function EntrealmHomePage() {
         color: "#f5ede0",
       }}
     >
+      {/* Nav */}
+      <nav
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-end",
+          gap: "2.5rem",
+          padding: "1.25rem 3rem",
+          background: "rgba(10,9,6,0.7)",
+          backdropFilter: "blur(30px)",
+          WebkitBackdropFilter: "blur(30px)",
+        }}
+      >
+        {[
+          { label: "Artistes", href: "#artistes" },
+          { label: "Tarifs", href: "/entrealm/tarifs" },
+          { label: "Inscription", href: "/entrealm/inscription" },
+          { label: "Login", href: "/entrealm/login" },
+        ].map((l) => (
+          <a
+            key={l.href}
+            href={l.href}
+            style={{
+              fontSize: "0.7rem",
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "#99907e",
+              textDecoration: "none",
+              fontWeight: 500,
+              transition: "color .3s",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#e6c364")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "#99907e")}
+          >
+            {l.label}
+          </a>
+        ))}
+      </nav>
+
       {/* Logo */}
       <Image
         src="/logo-entrealm-art.png"
@@ -262,6 +306,7 @@ export default function EntrealmHomePage() {
 
       {/* ═══════ SECTION 3 — ARTISTE EN VEDETTE ═══════ */}
       <section
+        id="artistes"
         style={{
           maxWidth: "780px",
           margin: "0 auto",
