@@ -137,7 +137,7 @@ export default function JobySmithPage() {
             top: 0,
             height: "100%",
             width: "65%",
-            background: "linear-gradient(to right, transparent 35%, #0a0906 85%)",
+            background: "linear-gradient(to left, transparent, rgba(0,0,0,0.7))",
             pointerEvents: "none",
           }}
         />
