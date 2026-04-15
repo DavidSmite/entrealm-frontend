@@ -60,6 +60,8 @@ export default function JobySmithDashboard() {
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -137,6 +139,82 @@ export default function JobySmithDashboard() {
       }}
     >
       <div style={{ maxWidth: "960px", margin: "0 auto" }}>
+        {/* Photo de profil */}
+        <div style={{ textAlign: "center", marginBottom: "3rem" }}>
+          <div
+            style={{
+              width: "120px",
+              height: "120px",
+              borderRadius: "50%",
+              overflow: "hidden",
+              border: "2px solid rgba(201,168,76,0.3)",
+              margin: "0 auto 1.25rem",
+              background: "#1a1610",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            {profileImage ? (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                src={profileImage}
+                alt="Photo de profil"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+            ) : (
+              <span className={cinzel.className} style={{ fontSize: "2rem", color: "#c9a84c" }}>
+                JS
+              </span>
+            )}
+          </div>
+          <label
+            style={{
+              display: "inline-block",
+              padding: "0.5rem 1.5rem",
+              border: "1px solid rgba(201,168,76,0.3)",
+              color: "#c9a84c",
+              fontSize: "0.7rem",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              cursor: uploading ? "wait" : "pointer",
+              opacity: uploading ? 0.5 : 1,
+              transition: "all .3s",
+            }}
+          >
+            {uploading ? "Envoi..." : "Changer la photo"}
+            <input
+              type="file"
+              accept="image/*"
+              style={{ display: "none" }}
+              disabled={uploading}
+              onChange={async (e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+                setUploading(true);
+                try {
+                  const token = localStorage.getItem("entrealm_token");
+                  const fd = new FormData();
+                  fd.append("photo", file);
+                  const res = await fetch(`${API}/api/entrealm/artist/upload-photo`, {
+                    method: "POST",
+                    headers: { Authorization: `Bearer ${token}` },
+                    body: fd,
+                  });
+                  const json = await res.json();
+                  if (res.ok && json.profileImage) {
+                    setProfileImage(json.profileImage);
+                  }
+                } catch {
+                  // silently fail
+                } finally {
+                  setUploading(false);
+                }
+              }}
+            />
+          </label>
+        </div>
+
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
           <div
