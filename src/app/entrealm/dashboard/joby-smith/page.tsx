@@ -99,9 +99,13 @@ export default function JobySmithDashboard() {
   const [error, setError] = useState("");
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
-  const [tab, setTab] = useState<"reservations" | "services">("reservations");
+  const [tab, setTab] = useState<"reservations" | "services" | "profil">("reservations");
   const [services, setServices] = useState<Service[]>([]);
   const [servicesLoaded, setServicesLoaded] = useState(false);
+  const [profileLoaded, setProfileLoaded] = useState(false);
+  const [profileForm, setProfileForm] = useState({ tagline: "", bio: "", theme: "dark", instagram: "", facebook: "", youtube: "", website: "" });
+  const [profileSaving, setProfileSaving] = useState(false);
+  const [profileSuccess, setProfileSuccess] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState(EMPTY_FORM);
   const [adding, setAdding] = useState(false);
@@ -138,6 +142,52 @@ export default function JobySmithDashboard() {
         setServicesLoaded(true);
       }
     } catch { /* ignore */ }
+  }
+
+  async function loadProfile() {
+    try {
+      const res = await fetch(`${API}/api/entrealm/artist/profile`, {
+        headers: { Authorization: `Bearer ${getToken()}` },
+      });
+      if (res.ok) {
+        const json = await res.json();
+        setProfileForm({
+          tagline: json.tagline || "",
+          bio: json.bio || "",
+          theme: json.theme || "dark",
+          instagram: json.socialLinks?.instagram || "",
+          facebook: json.socialLinks?.facebook || "",
+          youtube: json.socialLinks?.youtube || "",
+          website: json.socialLinks?.website || "",
+        });
+        if (json.profileImage) setProfileImage(json.profileImage);
+        setProfileLoaded(true);
+      }
+    } catch { /* ignore */ }
+  }
+
+  async function saveProfile() {
+    setProfileSaving(true);
+    setProfileSuccess(false);
+    try {
+      const res = await fetch(`${API}/api/entrealm/artist/profile`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${getToken()}` },
+        body: JSON.stringify({
+          tagline: profileForm.tagline,
+          bio: profileForm.bio,
+          theme: profileForm.theme,
+          socialLinks: {
+            instagram: profileForm.instagram,
+            facebook: profileForm.facebook,
+            youtube: profileForm.youtube,
+            website: profileForm.website,
+          },
+        }),
+      });
+      if (res.ok) setProfileSuccess(true);
+    } catch { /* ignore */ }
+    setProfileSaving(false);
   }
 
   function startEdit(s: Service) {
@@ -269,12 +319,14 @@ export default function JobySmithDashboard() {
           {[
             { key: "reservations" as const, label: "Réservations" },
             { key: "services" as const, label: "Services" },
+            { key: "profil" as const, label: "Profil" },
           ].map((t) => (
             <button
               key={t.key}
               onClick={() => {
                 setTab(t.key);
                 if (t.key === "services" && !servicesLoaded) loadServices();
+                if (t.key === "profil" && !profileLoaded) loadProfile();
               }}
               style={{
                 padding: "0.75rem 2rem",
@@ -450,6 +502,107 @@ export default function JobySmithDashboard() {
                 + Ajouter un service
               </button>
             )}
+          </div>
+        )}
+
+        {/* ═══ TAB PROFIL ═══ */}
+        {tab === "profil" && (
+          <div>
+            <h2 className={cinzel.className} style={{ fontSize: "1rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#c9a84c", marginBottom: "1.5rem" }}>
+              Mon profil
+            </h2>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem", maxWidth: "600px" }}>
+              <div>
+                <span style={labelStyle}>Tagline</span>
+                <input style={inputStyle} value={profileForm.tagline} onChange={(e) => setProfileForm({ ...profileForm, tagline: e.target.value })} placeholder="Ex : Architecte Vocale & Artiste" />
+              </div>
+
+              <div>
+                <span style={labelStyle}>Bio</span>
+                <textarea
+                  style={{ ...inputStyle, minHeight: "120px", resize: "vertical" }}
+                  value={profileForm.bio}
+                  onChange={(e) => setProfileForm({ ...profileForm, bio: e.target.value })}
+                  placeholder="Votre biographie..."
+                />
+              </div>
+
+              <div>
+                <span style={labelStyle}>Thème de ma page publique</span>
+                <div style={{ display: "flex", gap: "0.5rem", marginTop: "0.3rem" }}>
+                  {[
+                    { key: "dark", label: "Sombre" },
+                    { key: "light", label: "Claire" },
+                  ].map((t) => (
+                    <button
+                      key={t.key}
+                      onClick={() => setProfileForm({ ...profileForm, theme: t.key })}
+                      style={{
+                        padding: "0.5rem 1.5rem",
+                        border: profileForm.theme === t.key ? "1px solid #c9a84c" : "1px solid rgba(201,168,76,0.2)",
+                        background: profileForm.theme === t.key ? "rgba(201,168,76,0.15)" : "transparent",
+                        color: profileForm.theme === t.key ? "#c9a84c" : "#777",
+                        fontSize: "0.75rem",
+                        letterSpacing: "0.08em",
+                        textTransform: "uppercase",
+                        cursor: "pointer",
+                        transition: "all .3s",
+                      }}
+                    >
+                      {t.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div style={{ borderTop: "1px solid rgba(201,168,76,0.1)", paddingTop: "1.25rem", marginTop: "0.5rem" }}>
+                <span style={{ ...labelStyle, marginBottom: "1rem", display: "block" }}>Réseaux sociaux</span>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+                  <div>
+                    <span style={labelStyle}>Instagram</span>
+                    <input style={inputStyle} value={profileForm.instagram} onChange={(e) => setProfileForm({ ...profileForm, instagram: e.target.value })} placeholder="https://instagram.com/..." />
+                  </div>
+                  <div>
+                    <span style={labelStyle}>Facebook</span>
+                    <input style={inputStyle} value={profileForm.facebook} onChange={(e) => setProfileForm({ ...profileForm, facebook: e.target.value })} placeholder="https://facebook.com/..." />
+                  </div>
+                  <div>
+                    <span style={labelStyle}>YouTube</span>
+                    <input style={inputStyle} value={profileForm.youtube} onChange={(e) => setProfileForm({ ...profileForm, youtube: e.target.value })} placeholder="https://youtube.com/..." />
+                  </div>
+                  <div>
+                    <span style={labelStyle}>Site web</span>
+                    <input style={inputStyle} value={profileForm.website} onChange={(e) => setProfileForm({ ...profileForm, website: e.target.value })} placeholder="https://..." />
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginTop: "0.5rem" }}>
+                <button
+                  onClick={saveProfile}
+                  disabled={profileSaving}
+                  style={{
+                    padding: "0.75rem 2rem",
+                    background: "linear-gradient(135deg,#e6c364,#c9a84c)",
+                    color: "#0a0906",
+                    fontSize: "0.75rem",
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    fontWeight: 700,
+                    border: "none",
+                    cursor: profileSaving ? "wait" : "pointer",
+                    opacity: profileSaving ? 0.6 : 1,
+                    transition: "opacity .3s",
+                  }}
+                >
+                  {profileSaving ? "Enregistrement..." : "Enregistrer"}
+                </button>
+                {profileSuccess && (
+                  <span style={{ fontSize: "0.85rem", color: "#22c55e" }}>Profil mis à jour</span>
+                )}
+              </div>
+            </div>
           </div>
         )}
 

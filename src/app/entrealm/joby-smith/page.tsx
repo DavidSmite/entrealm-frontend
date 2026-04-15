@@ -1,9 +1,16 @@
 "use client";
 
 import { Pinyon_Script, Noto_Serif, Manrope } from "next/font/google";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
+
+const PUBLIC_API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+
+const THEMES = {
+  dark: { bg: "#0a0906", bgAlt: "#0f0d0a", bgCard: "#1d1b17", text: "#e7e2db", textMuted: "#99907e", textSub: "#d0c5b2", accent: "#e6c364", accentAlt: "#c9a84c", border: "rgba(201,168,76,0.15)" },
+  light: { bg: "#f5f0e8", bgAlt: "#ece5d8", bgCard: "#e8e0d0", text: "#1a1209", textMuted: "#6b5c3e", textSub: "#3d3220", accent: "#8b6914", accentAlt: "#6d5010", border: "rgba(139,105,20,0.2)" },
+};
 
 const pinyon = Pinyon_Script({
   subsets: ["latin"],
@@ -28,9 +35,19 @@ const TRACKS = [
 
 export default function JobySmithPage() {
   const [activeTrack, setActiveTrack] = useState<number | null>(null);
+  const [t, setT] = useState(THEMES.dark);
+
+  useEffect(() => {
+    fetch(`${PUBLIC_API}/api/entrealm/artist/public/joby-smith`)
+      .then((r) => r.ok ? r.json() : null)
+      .then((data) => {
+        if (data?.theme === "light") setT(THEMES.light);
+      })
+      .catch(() => {});
+  }, []);
 
   return (
-    <div className={manrope.className} style={{ background: "#0a0906", color: "#e7e2db" }}>
+    <div className={manrope.className} style={{ background: t.bg, color: t.text }}>
 
       {/* ── NAV ── */}
       <nav
@@ -53,7 +70,7 @@ export default function JobySmithPage() {
         <a
           href="/entrealm"
           className={notoSerif.className}
-          style={{ fontSize: "0.85rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#e7e2db", textDecoration: "none" }}
+          style={{ fontSize: "0.85rem", letterSpacing: "0.15em", textTransform: "uppercase", color: t.text, textDecoration: "none" }}
         >
           Entrealm
         </a>
@@ -67,9 +84,9 @@ export default function JobySmithPage() {
             <a
               key={l.href}
               href={`/entrealm/${l.href}`}
-              style={{ fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#99907e", textDecoration: "none", fontWeight: 500, transition: "color .3s" }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#e6c364")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#99907e")}
+              style={{ fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", color: t.textMuted, textDecoration: "none", fontWeight: 500, transition: "color .3s" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = t.accent)}
+              onMouseLeave={(e) => (e.currentTarget.style.color = t.textMuted)}
             >
               {l.label}
             </a>
@@ -90,7 +107,7 @@ export default function JobySmithPage() {
           position: "relative",
           width: "100vw",
           height: "100vh",
-          background: "#0a0906",
+          background: t.bg,
         }}
       >
         {/* Photo */}
@@ -137,7 +154,7 @@ export default function JobySmithPage() {
             padding: "0 3rem",
           }}
         >
-          <p style={{ fontSize: "0.75rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c9a84c", marginBottom: "1.5rem", fontWeight: 700 }}>
+          <p style={{ fontSize: "0.75rem", letterSpacing: "0.2em", textTransform: "uppercase", color: t.accentAlt, marginBottom: "1.5rem", fontWeight: 700 }}>
             Architecte Vocale &amp; Artiste
           </p>
 
@@ -174,13 +191,13 @@ export default function JobySmithPage() {
             </text>
           </svg>
 
-          <p style={{ fontSize: "0.95rem", lineHeight: 1.8, color: "#d0c5b2", maxWidth: "440px", margin: "2.5rem 0" }}>
+          <p style={{ fontSize: "0.95rem", lineHeight: 1.8, color: t.textSub, maxWidth: "440px", margin: "2.5rem 0" }}>
             Une voix qui traverse la frontière entre l&apos;émouvant et le profond.
             Joby Smith est une artiste vocale et architecte sonore dédiée à la
             préservation de l&apos;individualité.
           </p>
 
-          <p style={{ fontSize: "0.85rem", lineHeight: 1.8, color: "#99907e", maxWidth: "440px", marginBottom: "2.5rem" }}>
+          <p style={{ fontSize: "0.85rem", lineHeight: 1.8, color: t.textMuted, maxWidth: "440px", marginBottom: "2.5rem" }}>
             Avec 25 ans d&apos;expérience en composition, interprétation et
             transmission, elle propose des sessions de coaching vocal inégalées
             qui guident les artistes vers la maîtrise de leur instrument.
@@ -189,7 +206,7 @@ export default function JobySmithPage() {
           <Link
             href="/entrealm/joby-smith/coaching"
             className={notoSerif.className}
-            style={{ fontSize: "0.85rem", color: "#c9a84c", textDecoration: "underline", textUnderlineOffset: "4px", marginBottom: "2.5rem", display: "inline-block", transition: "opacity .3s" }}
+            style={{ fontSize: "0.85rem", color: t.accentAlt, textDecoration: "underline", textUnderlineOffset: "4px", marginBottom: "2.5rem", display: "inline-block", transition: "opacity .3s" }}
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
           >
@@ -213,7 +230,7 @@ export default function JobySmithPage() {
       <section
         className="philosophy-section"
         style={{
-          background: "#0f0d0a",
+          background: t.bgAlt,
           borderTop: "1px solid rgba(201,168,76,0.15)",
           borderBottom: "1px solid rgba(201,168,76,0.15)",
           padding: "5rem 3rem",
@@ -225,18 +242,18 @@ export default function JobySmithPage() {
       >
         <div style={{ position: "absolute", inset: 0, zIndex: 0, backgroundImage: "url('/joby-scene.png')", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.2 }} />
         <div style={{ maxWidth: "700px", position: "relative", zIndex: 1 }}>
-          <p style={{ fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#99907e", marginBottom: "1.5rem", fontWeight: 600 }}>
+          <p style={{ fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: t.textMuted, marginBottom: "1.5rem", fontWeight: 600 }}>
             Philosophie
           </p>
           <h2
             className={notoSerif.className}
-            style={{ fontSize: "clamp(1.8rem,3vw,2.8rem)", fontWeight: 400, letterSpacing: "-0.02em", color: "#e7e2db", lineHeight: 1.2, marginBottom: "2rem" }}
+            style={{ fontSize: "clamp(1.8rem,3vw,2.8rem)", fontWeight: 400, letterSpacing: "-0.02em", color: t.text, lineHeight: 1.2, marginBottom: "2rem" }}
           >
             La Philosophie<br />du Son
           </h2>
           <p
             className={notoSerif.className}
-            style={{ fontSize: "1.1rem", lineHeight: 1.9, color: "#d0c5b2", fontStyle: "italic", maxWidth: "480px", marginBottom: "2rem" }}
+            style={{ fontSize: "1.1rem", lineHeight: 1.9, color: t.textSub, fontStyle: "italic", maxWidth: "480px", marginBottom: "2rem" }}
           >
             La musique ne s&apos;entend pas seulement ; elle s&apos;habite. Dans nos
             sessions, nous explorons le paysage physiologique et émotionnel de
@@ -244,7 +261,7 @@ export default function JobySmithPage() {
           </p>
           <Link
             href="/entrealm/joby-smith/music"
-            style={{ fontSize: "0.65rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#e6c364", textDecoration: "none", fontWeight: 600, borderBottom: "1px solid #e6c364", paddingBottom: "0.3rem", transition: "opacity .3s" }}
+            style={{ fontSize: "0.65rem", letterSpacing: "0.1em", textTransform: "uppercase", color: t.accent, textDecoration: "none", fontWeight: 600, borderBottom: "1px solid #e6c364", paddingBottom: "0.3rem", transition: "opacity .3s" }}
             onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
             onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
           >
@@ -257,15 +274,15 @@ export default function JobySmithPage() {
       <section
         id="music"
         className="music-section"
-        style={{ padding: "6rem 3rem", background: "#1d1b17" }}
+        style={{ padding: "6rem 3rem", background: t.bgCard }}
       >
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <p style={{ fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#99907e", marginBottom: "1rem", fontWeight: 600 }}>
+          <p style={{ fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: t.textMuted, marginBottom: "1rem", fontWeight: 600 }}>
             Écouter
           </p>
           <h2
             className={notoSerif.className}
-            style={{ fontSize: "clamp(2rem,3.5vw,3rem)", fontWeight: 400, letterSpacing: "-0.02em", color: "#e7e2db", marginBottom: "3rem" }}
+            style={{ fontSize: "clamp(2rem,3.5vw,3rem)", fontWeight: 400, letterSpacing: "-0.02em", color: t.text, marginBottom: "3rem" }}
           >
             Titres Phares
           </h2>
@@ -297,7 +314,7 @@ export default function JobySmithPage() {
                     <p className={notoSerif.className} style={{ fontSize: "1.05rem", color: activeTrack === i ? "#e6c364" : "#e7e2db" }}>
                       {t.title}
                     </p>
-                    <p style={{ fontSize: "0.7rem", color: "#99907e", letterSpacing: "0.1em", textTransform: "uppercase", marginTop: "0.2rem", fontWeight: 500 }}>
+                    <p style={{ fontSize: "0.7rem", color: t.textMuted, letterSpacing: "0.1em", textTransform: "uppercase", marginTop: "0.2rem", fontWeight: 500 }}>
                       Joby Smith
                     </p>
                   </div>
@@ -306,7 +323,7 @@ export default function JobySmithPage() {
                   <div className="progress-bar" style={{ width: 200, height: 2, background: "#4d4637", position: "relative" }}>
                     <div style={{ width: activeTrack === i ? "35%" : "0%", height: "100%", background: "#e6c364", transition: "width .5s" }} />
                   </div>
-                  <span style={{ fontSize: "0.8rem", color: "#99907e", fontWeight: 500, minWidth: 35 }}>{t.duration}</span>
+                  <span style={{ fontSize: "0.8rem", color: t.textMuted, fontWeight: 500, minWidth: 35 }}>{t.duration}</span>
                 </div>
               </div>
             ))}
@@ -315,9 +332,9 @@ export default function JobySmithPage() {
           <div style={{ display: "flex", justifyContent: "center", marginTop: "3rem" }}>
             <Link
               href="/entrealm/joby-smith/videos"
-              style={{ padding: "0.85rem 2.2rem", border: "1px solid rgba(230,195,100,0.4)", color: "#e6c364", fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", fontWeight: 600, background: "transparent", transition: "all .3s" }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = "#e6c364"; e.currentTarget.style.color = "#0a0906"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#e6c364"; }}
+              style={{ padding: "0.85rem 2.2rem", border: "1px solid rgba(230,195,100,0.4)", color: t.accent, fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", fontWeight: 600, background: "transparent", transition: "all .3s" }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = t.accent; e.currentTarget.style.color = t.bg; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = t.accent; }}
             >
               Voir les vidéos →
             </Link>
@@ -363,9 +380,9 @@ export default function JobySmithPage() {
       {/* ── FOOTER ── */}
       <footer
         className="footer"
-        style={{ padding: "3rem", background: "#0a0906", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}
+        style={{ padding: "3rem", background: t.bg, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}
       >
-        <a href="/entrealm" className={notoSerif.className} style={{ fontSize: "0.8rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#99907e", textDecoration: "none" }}>
+        <a href="/entrealm" className={notoSerif.className} style={{ fontSize: "0.8rem", letterSpacing: "0.12em", textTransform: "uppercase", color: t.textMuted, textDecoration: "none" }}>
           Entrealm
         </a>
         <p style={{ fontSize: "0.7rem", color: "#4d4637", letterSpacing: "0.05em" }}>
@@ -380,9 +397,9 @@ export default function JobySmithPage() {
             <a
               key={l.href}
               href={`/entrealm/${l.href}`}
-              style={{ fontSize: "0.65rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#99907e", textDecoration: "none", fontWeight: 500, transition: "color .3s" }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#e6c364")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#99907e")}
+              style={{ fontSize: "0.65rem", letterSpacing: "0.1em", textTransform: "uppercase", color: t.textMuted, textDecoration: "none", fontWeight: 500, transition: "color .3s" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = t.accent)}
+              onMouseLeave={(e) => (e.currentTarget.style.color = t.textMuted)}
             >
               {l.label}
             </a>
