@@ -124,6 +124,20 @@ export default function JobySmithDashboard() {
         if (!cancelled) setLoading(false);
       }
     })();
+
+    // Charger la photo de profil au montage
+    const token = localStorage.getItem("entrealm_token");
+    if (token) {
+      fetch(`${API}/api/entrealm/artist/profile`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((r) => r.ok ? r.json() : null)
+        .then((json) => {
+          if (!cancelled && json?.profileImage) setProfileImage(json.profileImage);
+        })
+        .catch(() => {});
+    }
+
     return () => { cancelled = true; };
   }, []);
 
