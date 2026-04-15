@@ -62,7 +62,7 @@ export default function JobySmithPage() {
           alignItems: "center",
           justifyContent: "space-between",
           padding: "1.25rem 3rem",
-          background: "rgba(10,9,6,0.7)",
+          background: `color-mix(in srgb, ${th.bg} 85%, transparent)`,
           backdropFilter: "blur(30px)",
           WebkitBackdropFilter: "blur(30px)",
         }}
@@ -84,9 +84,9 @@ export default function JobySmithPage() {
             <a
               key={l.href}
               href={`/entrealm/${l.href}`}
-              style={{ fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", color: th.textMuted, textDecoration: "none", fontWeight: 500, transition: "color .3s" }}
+              style={{ fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", color: th.text, textDecoration: "none", fontWeight: 500, transition: "color .3s" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = th.accent)}
-              onMouseLeave={(e) => (e.currentTarget.style.color = th.textMuted)}
+              onMouseLeave={(e) => (e.currentTarget.style.color = th.text)}
             >
               {l.label}
             </a>
