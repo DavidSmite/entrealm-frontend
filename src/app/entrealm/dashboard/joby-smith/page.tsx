@@ -337,6 +337,31 @@ export default function JobySmithDashboard() {
     <div className={manrope.className} style={{ minHeight: "100vh", backgroundColor: "#0a0906", color: "#f5ede0", padding: "2.5rem 1.5rem" }}>
       <div style={{ maxWidth: "960px", margin: "0 auto" }}>
 
+        {/* Déconnexion */}
+        <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "1rem" }}>
+          <button
+            onClick={() => {
+              localStorage.removeItem("entrealm_token");
+              localStorage.removeItem("entrealm_profile_image");
+              router.push("/entrealm/login");
+            }}
+            style={{
+              background: "transparent",
+              border: "none",
+              color: "#99907e",
+              fontSize: "0.65rem",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              cursor: "pointer",
+              transition: "color .3s",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#ef4444")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "#99907e")}
+          >
+            Déconnexion
+          </button>
+        </div>
+
         {/* Photo de profil */}
         <div style={{ textAlign: "center", marginBottom: "3rem" }}>
           <div style={{ width: "120px", height: "120px", borderRadius: "50%", overflow: "hidden", border: "2px solid rgba(201,168,76,0.3)", margin: "0 auto 1.25rem", background: "#1a1610", display: "flex", alignItems: "center", justifyContent: "center" }}>
