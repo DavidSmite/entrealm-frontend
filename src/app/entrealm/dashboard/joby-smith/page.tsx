@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Cormorant_Garamond, Cinzel } from "next/font/google";
+import { Noto_Serif, Manrope } from "next/font/google";
 
-const cormorant = Cormorant_Garamond({
+const notoSerif = Noto_Serif({
   subsets: ["latin"],
-  weight: ["400", "600"],
+  weight: ["400", "700"],
 });
 
-const cinzel = Cinzel({
+const manrope = Manrope({
   subsets: ["latin"],
   weight: ["400", "700"],
 });
@@ -263,7 +263,7 @@ export default function JobySmithDashboard() {
 
   if (loading) {
     return (
-      <div className={cormorant.className} style={{ minHeight: "100vh", backgroundColor: "#0a0906", display: "flex", alignItems: "center", justifyContent: "center", color: "#777", fontSize: "1.1rem" }}>
+      <div className={manrope.className} style={{ minHeight: "100vh", backgroundColor: "#0a0906", display: "flex", alignItems: "center", justifyContent: "center", color: "#777", fontSize: "1.1rem" }}>
         Chargement du dashboard...
       </div>
     );
@@ -271,7 +271,7 @@ export default function JobySmithDashboard() {
 
   if (error || !data) {
     return (
-      <div className={cormorant.className} style={{ minHeight: "100vh", backgroundColor: "#0a0906", display: "flex", alignItems: "center", justifyContent: "center", color: "#ef4444", fontSize: "1.1rem" }}>
+      <div className={manrope.className} style={{ minHeight: "100vh", backgroundColor: "#0a0906", display: "flex", alignItems: "center", justifyContent: "center", color: "#ef4444", fontSize: "1.1rem" }}>
         {error || "Impossible de charger les données."}
       </div>
     );
@@ -285,7 +285,7 @@ export default function JobySmithDashboard() {
   ];
 
   return (
-    <div className={cormorant.className} style={{ minHeight: "100vh", backgroundColor: "#0a0906", color: "#f5ede0", padding: "2.5rem 1.5rem" }}>
+    <div className={manrope.className} style={{ minHeight: "100vh", backgroundColor: "#0a0906", color: "#f5ede0", padding: "2.5rem 1.5rem" }}>
       <div style={{ maxWidth: "960px", margin: "0 auto" }}>
 
         {/* Photo de profil */}
@@ -295,7 +295,7 @@ export default function JobySmithDashboard() {
               /* eslint-disable-next-line @next/next/no-img-element */
               <img src={profileImage} alt="Photo de profil" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             ) : (
-              <span className={cinzel.className} style={{ fontSize: "2rem", color: "#c9a84c" }}>JS</span>
+              <span className={notoSerif.className} style={{ fontSize: "2rem", color: "#c9a84c" }}>JS</span>
             )}
           </div>
           <label style={{ display: "inline-block", padding: "0.5rem 1.5rem", border: "1px solid rgba(201,168,76,0.3)", color: "#c9a84c", fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", cursor: uploading ? "wait" : "pointer", opacity: uploading ? 0.5 : 1, transition: "all .3s" }}>
@@ -321,7 +321,7 @@ export default function JobySmithDashboard() {
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
           <div style={{ width: "60px", height: "1px", backgroundColor: "#c9a84c", margin: "0 auto 1.5rem" }} />
-          <h1 className={cinzel.className} style={{ fontSize: "1.5rem", fontWeight: 400, letterSpacing: "0.12em", textTransform: "uppercase", color: "#c9a84c", marginBottom: "0.4rem" }}>
+          <h1 className={notoSerif.className} style={{ fontSize: "1.5rem", fontWeight: 400, letterSpacing: "0.12em", textTransform: "uppercase", color: "#c9a84c", marginBottom: "0.4rem" }}>
             Dashboard — Joby Smith
           </h1>
           <p style={{ color: "#777", fontSize: "0.95rem" }}>Vue d&#39;ensemble de votre activité ENTREALM</p>
@@ -332,7 +332,7 @@ export default function JobySmithDashboard() {
           {kpis.map((kpi) => (
             <div key={kpi.label} style={{ border: "1px solid rgba(201, 168, 76, 0.25)", borderRadius: "4px", padding: "1.25rem", textAlign: "center" }}>
               <p style={{ fontSize: "0.8rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "#777", marginBottom: "0.5rem" }}>{kpi.label}</p>
-              <p className={cinzel.className} style={{ fontSize: "1.4rem", color: "#c9a84c", fontWeight: 400 }}>{kpi.value}</p>
+              <p className={notoSerif.className} style={{ fontSize: "1.4rem", color: "#c9a84c", fontWeight: 400 }}>{kpi.value}</p>
             </div>
           ))}
         </div>
@@ -373,7 +373,7 @@ export default function JobySmithDashboard() {
         {/* ═══ TAB RÉSERVATIONS ═══ */}
         {tab === "reservations" && (
           <div>
-            <h2 className={cinzel.className} style={{ fontSize: "1rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#c9a84c", marginBottom: "1rem" }}>
+            <h2 className={notoSerif.className} style={{ fontSize: "1rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#c9a84c", marginBottom: "1rem" }}>
               Réservations récentes
             </h2>
             {data.bookings.length === 0 ? (
@@ -384,7 +384,7 @@ export default function JobySmithDashboard() {
                   <thead>
                     <tr style={{ borderBottom: "1px solid rgba(201, 168, 76, 0.25)" }}>
                       {["Date", "Client", "Service", "Montant", "Statut"].map((h) => (
-                        <th key={h} className={cinzel.className} style={{ textAlign: "left", padding: "0.75rem 0.5rem", fontSize: "0.75rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#777", fontWeight: 400 }}>{h}</th>
+                        <th key={h} className={notoSerif.className} style={{ textAlign: "left", padding: "0.75rem 0.5rem", fontSize: "0.75rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#777", fontWeight: 400 }}>{h}</th>
                       ))}
                     </tr>
                   </thead>
@@ -413,7 +413,7 @@ export default function JobySmithDashboard() {
         {/* ═══ TAB SERVICES ═══ */}
         {tab === "services" && (
           <div>
-            <h2 className={cinzel.className} style={{ fontSize: "1rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#c9a84c", marginBottom: "1.5rem" }}>
+            <h2 className={notoSerif.className} style={{ fontSize: "1rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#c9a84c", marginBottom: "1.5rem" }}>
               Mes services
             </h2>
 
@@ -475,7 +475,7 @@ export default function JobySmithDashboard() {
               {/* ── Formulaire ajout ── */}
               {adding && (
                 <div style={{ border: "1px solid rgba(201,168,76,0.25)", borderRadius: "4px", padding: "1.5rem", background: "#0f0d0a" }}>
-                  <p className={cinzel.className} style={{ fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#c9a84c", marginBottom: "1rem" }}>Nouveau service</p>
+                  <p className={notoSerif.className} style={{ fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#c9a84c", marginBottom: "1rem" }}>Nouveau service</p>
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1rem" }}>
                     <div>
                       <span style={labelStyle}>Titre</span>
@@ -531,7 +531,7 @@ export default function JobySmithDashboard() {
         {/* ═══ TAB PROFIL ═══ */}
         {tab === "profil" && (
           <div>
-            <h2 className={cinzel.className} style={{ fontSize: "1rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#c9a84c", marginBottom: "1.5rem" }}>
+            <h2 className={notoSerif.className} style={{ fontSize: "1rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#c9a84c", marginBottom: "1.5rem" }}>
               Mon profil
             </h2>
 
