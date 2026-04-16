@@ -20,11 +20,12 @@ const manrope = Manrope({
 });
 
 const VIDEOS = [
-  { title: "Midnight Transcendence (Live)", duration: "4:32", embedId: "dQw4w9WgXcQ" },
-  { title: "Sankofa Sessions — Episode 1", duration: "12:14", embedId: "dQw4w9WgXcQ" },
-  { title: "Breathe (Clip officiel)", duration: "5:01", embedId: "dQw4w9WgXcQ" },
-  { title: "Masterclass : La Voix Comme Instrument", duration: "28:45", embedId: "dQw4w9WgXcQ" },
-  { title: "Joby Smith au Studio — Behind the Scenes", duration: "8:20", embedId: "dQw4w9WgXcQ" },
+  { title: "I Can Explain (Rachel Ferrell)", embedId: "J9zq7wnPCZc" },
+  { title: "Joby Smith's Story", embedId: "ldzzSz3svt4" },
+  { title: "I Never Loved a Man (Aretha Franklin)", embedId: "204BWf8iTgE" },
+  { title: "Oh Mon Amour (Joby Smith)", embedId: "-fqRlKAvp6s" },
+  { title: "Revoir le Jour (Joby Smith)", embedId: "NzuAb93eFTk" },
+  { title: "Sème (Joby Smith)", embedId: "YXwP2HumvE0" },
 ];
 
 export default function VideosPage() {
@@ -168,9 +169,6 @@ export default function VideosPage() {
               >
                 {v.title}
               </h3>
-              <p style={{ fontSize: "0.75rem", color: "#99907e", fontWeight: 500 }}>
-                {v.duration}
-              </p>
             </div>
           ))}
         </div>
