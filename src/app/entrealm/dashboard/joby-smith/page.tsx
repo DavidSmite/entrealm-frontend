@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Noto_Serif, Manrope } from "next/font/google";
 
 const notoSerif = Noto_Serif({
@@ -93,7 +94,14 @@ const smallBtnStyle: React.CSSProperties = {
   transition: "all .3s",
 };
 
+function fetchWithTimeout(url: string, opts: RequestInit = {}, ms = 15000): Promise<Response> {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), ms);
+  return fetch(url, { ...opts, signal: controller.signal }).finally(() => clearTimeout(id));
+}
+
 export default function JobySmithDashboard() {
+  const router = useRouter();
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -105,7 +113,11 @@ export default function JobySmithDashboard() {
   const [tab, setTab] = useState<"reservations" | "services" | "profil">("reservations");
   const [services, setServices] = useState<Service[]>([]);
   const [servicesLoaded, setServicesLoaded] = useState(false);
+  const [servicesLoading, setServicesLoading] = useState(false);
+  const [servicesError, setServicesError] = useState("");
   const [profileLoaded, setProfileLoaded] = useState(false);
+  const [profileLoading, setProfileLoading] = useState(false);
+  const [profileError, setProfileError] = useState("");
   const [profileForm, setProfileForm] = useState({ tagline: "", bio: "", theme: "dark", instagram: "", facebook: "", youtube: "", website: "" });
   const [profileSaving, setProfileSaving] = useState(false);
   const [profileSuccess, setProfileSuccess] = useState(false);
@@ -114,46 +126,58 @@ export default function JobySmithDashboard() {
   const [adding, setAdding] = useState(false);
 
   useEffect(() => {
+    // #1 — JWT check
+    const token = localStorage.getItem("entrealm_token");
+    if (!token) {
+      router.replace("/entrealm/login");
+      return;
+    }
+
     let cancelled = false;
     (async () => {
       try {
-        const res = await fetch(`${API}/api/entrealm/dashboard/joby-smith`, { cache: "no-store" });
+        const res = await fetchWithTimeout(`${API}/api/entrealm/dashboard/joby-smith`, { cache: "no-store" });
         if (!res.ok) throw new Error("Erreur chargement dashboard");
         const json = await res.json();
         if (!cancelled) setData(json);
       } catch (e: any) {
-        if (!cancelled) setError(e?.message || "Erreur inconnue");
+        if (!cancelled) {
+          if (e?.name === "AbortError") {
+            setError("Le serveur met du temps à répondre, veuillez patienter...");
+          } else {
+            setError(e?.message || "Erreur inconnue");
+          }
+        }
       } finally {
         if (!cancelled) setLoading(false);
       }
     })();
 
     // Charger la photo de profil au montage
-    const token = localStorage.getItem("entrealm_token");
-    if (token) {
-      fetch(`${API}/api/entrealm/artist/profile`, {
-        headers: { Authorization: `Bearer ${token}` },
+    fetchWithTimeout(`${API}/api/entrealm/artist/profile`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((r) => r.ok ? r.json() : null)
+      .then((json) => {
+        if (!cancelled && json?.profileImage) {
+          setProfileImage(json.profileImage);
+          localStorage.setItem("entrealm_profile_image", json.profileImage);
+        }
       })
-        .then((r) => r.ok ? r.json() : null)
-        .then((json) => {
-          if (!cancelled && json?.profileImage) {
-            setProfileImage(json.profileImage);
-            localStorage.setItem("entrealm_profile_image", json.profileImage);
-          }
-        })
-        .catch(() => {});
-    }
+      .catch(() => {});
 
     return () => { cancelled = true; };
-  }, []);
+  }, [router]);
 
   function getToken() {
     return localStorage.getItem("entrealm_token") || "";
   }
 
   async function loadServices() {
+    setServicesLoading(true);
+    setServicesError("");
     try {
-      const res = await fetch(`${API}/api/entrealm/artist/services`, {
+      const res = await fetchWithTimeout(`${API}/api/entrealm/artist/services`, {
         headers: { Authorization: `Bearer ${getToken()}` },
       });
       if (res.ok) {
@@ -161,12 +185,18 @@ export default function JobySmithDashboard() {
         setServices(json.filter((s: Service) => s.isActive));
         setServicesLoaded(true);
       }
-    } catch { /* ignore */ }
+    } catch (e: any) {
+      setServicesError(e?.name === "AbortError" ? "Le serveur met du temps à répondre..." : "Erreur chargement services");
+    } finally {
+      setServicesLoading(false);
+    }
   }
 
   async function loadProfile() {
+    setProfileLoading(true);
+    setProfileError("");
     try {
-      const res = await fetch(`${API}/api/entrealm/artist/profile`, {
+      const res = await fetchWithTimeout(`${API}/api/entrealm/artist/profile`, {
         headers: { Authorization: `Bearer ${getToken()}` },
       });
       if (res.ok) {
@@ -183,14 +213,19 @@ export default function JobySmithDashboard() {
         if (json.profileImage) setProfileImage(json.profileImage);
         setProfileLoaded(true);
       }
-    } catch { /* ignore */ }
+    } catch (e: any) {
+      setProfileError(e?.name === "AbortError" ? "Le serveur met du temps à répondre..." : "Erreur chargement profil");
+    } finally {
+      setProfileLoading(false);
+    }
   }
 
   async function saveProfile() {
     setProfileSaving(true);
     setProfileSuccess(false);
+    setProfileError("");
     try {
-      const res = await fetch(`${API}/api/entrealm/artist/profile`, {
+      const res = await fetchWithTimeout(`${API}/api/entrealm/artist/profile`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${getToken()}` },
         body: JSON.stringify({
@@ -206,7 +241,10 @@ export default function JobySmithDashboard() {
         }),
       });
       if (res.ok) setProfileSuccess(true);
-    } catch { /* ignore */ }
+      else setProfileError("Erreur sauvegarde profil");
+    } catch {
+      setProfileError("Erreur réseau");
+    }
     setProfileSaving(false);
   }
 
@@ -235,30 +273,41 @@ export default function JobySmithDashboard() {
   }
 
   async function saveService() {
-    const body = {
-      title: form.title,
-      description: form.description,
-      price: form.price ? Math.round(parseFloat(form.price) * 100) : null,
-      unit: form.unit,
-      category: form.category,
-    };
-    const headers = { "Content-Type": "application/json", Authorization: `Bearer ${getToken()}` };
+    setServicesError("");
+    try {
+      const body = {
+        title: form.title,
+        description: form.description,
+        price: form.price ? Math.round(parseFloat(form.price) * 100) : null,
+        unit: form.unit,
+        category: form.category,
+      };
+      const headers = { "Content-Type": "application/json", Authorization: `Bearer ${getToken()}` };
 
-    if (adding) {
-      await fetch(`${API}/api/entrealm/artist/services`, { method: "POST", headers, body: JSON.stringify(body) });
-    } else if (editingId) {
-      await fetch(`${API}/api/entrealm/artist/services/${editingId}`, { method: "PUT", headers, body: JSON.stringify(body) });
+      if (adding) {
+        await fetchWithTimeout(`${API}/api/entrealm/artist/services`, { method: "POST", headers, body: JSON.stringify(body) });
+      } else if (editingId) {
+        await fetchWithTimeout(`${API}/api/entrealm/artist/services/${editingId}`, { method: "PUT", headers, body: JSON.stringify(body) });
+      }
+      cancelForm();
+      await loadServices();
+    } catch {
+      setServicesError("Erreur sauvegarde service");
     }
-    cancelForm();
-    await loadServices();
   }
 
   async function deleteService(id: string) {
-    await fetch(`${API}/api/entrealm/artist/services/${id}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${getToken()}` },
-    });
-    await loadServices();
+    if (!confirm("Supprimer ce service ?")) return;
+    setServicesError("");
+    try {
+      await fetchWithTimeout(`${API}/api/entrealm/artist/services/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${getToken()}` },
+      });
+      await loadServices();
+    } catch {
+      setServicesError("Erreur suppression service");
+    }
   }
 
   if (loading) {
@@ -417,7 +466,13 @@ export default function JobySmithDashboard() {
               Mes services
             </h2>
 
-            {services.length === 0 && !adding && (
+            {servicesLoading && (
+              <p style={{ color: "#777", fontSize: "0.95rem", marginBottom: "1.5rem" }}>Chargement des services...</p>
+            )}
+            {servicesError && (
+              <p style={{ color: "#ef4444", fontSize: "0.85rem", marginBottom: "1rem" }}>{servicesError}</p>
+            )}
+            {!servicesLoading && services.length === 0 && !adding && (
               <p style={{ color: "#777", fontSize: "0.95rem", marginBottom: "1.5rem" }}>Aucun service configuré.</p>
             )}
 
@@ -534,6 +589,13 @@ export default function JobySmithDashboard() {
             <h2 className={notoSerif.className} style={{ fontSize: "1rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#c9a84c", marginBottom: "1.5rem" }}>
               Mon profil
             </h2>
+
+            {profileLoading && (
+              <p style={{ color: "#777", fontSize: "0.95rem", marginBottom: "1.5rem" }}>Chargement du profil...</p>
+            )}
+            {profileError && (
+              <p style={{ color: "#ef4444", fontSize: "0.85rem", marginBottom: "1rem" }}>{profileError}</p>
+            )}
 
             <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem", maxWidth: "600px" }}>
               <div>
