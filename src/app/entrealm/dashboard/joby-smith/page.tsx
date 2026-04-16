@@ -97,7 +97,10 @@ export default function JobySmithDashboard() {
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [profileImage, setProfileImage] = useState<string | null>(() => {
+    if (typeof window !== "undefined") return localStorage.getItem("entrealm_profile_image");
+    return null;
+  });
   const [uploading, setUploading] = useState(false);
   const [tab, setTab] = useState<"reservations" | "services" | "profil">("reservations");
   const [services, setServices] = useState<Service[]>([]);
@@ -133,7 +136,10 @@ export default function JobySmithDashboard() {
       })
         .then((r) => r.ok ? r.json() : null)
         .then((json) => {
-          if (!cancelled && json?.profileImage) setProfileImage(json.profileImage);
+          if (!cancelled && json?.profileImage) {
+            setProfileImage(json.profileImage);
+            localStorage.setItem("entrealm_profile_image", json.profileImage);
+          }
         })
         .catch(() => {});
     }
@@ -303,7 +309,10 @@ export default function JobySmithDashboard() {
                 fd.append("photo", file);
                 const res = await fetch(`${API}/api/entrealm/artist/upload-photo`, { method: "POST", headers: { Authorization: `Bearer ${getToken()}` }, body: fd });
                 const json = await res.json();
-                if (res.ok && json.profileImage) setProfileImage(json.profileImage);
+                if (res.ok && json.profileImage) {
+                  setProfileImage(json.profileImage);
+                  localStorage.setItem("entrealm_profile_image", json.profileImage);
+                }
               } catch { /* */ } finally { setUploading(false); }
             }} />
           </label>
