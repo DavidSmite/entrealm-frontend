@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Cinzel, Manrope } from "next/font/google";
 import Link from "next/link";
+import { getStatus, STATUS_STYLES, PLAN_LABELS } from "@/lib/entrealm-status";
 
 const cinzel = Cinzel({ subsets: ["latin"], weight: ["400", "700"] });
 const manrope = Manrope({ subsets: ["latin"], weight: ["400", "700"] });
@@ -50,19 +51,6 @@ export default function AdminArtistesPage() {
       });
   }, [router]);
 
-  const getStatus = (a: Artiste): "actif" | "suspendu" | "archive" => {
-    if (a.status === "actif" || a.status === "suspendu" || a.status === "archive") {
-      return a.status;
-    }
-    return a.isActive ? "actif" : "archive";
-  };
-
-  const STATUS_STYLES: Record<"actif"|"suspendu"|"archive", {bg:string;color:string;label:string}> = {
-    actif:    { bg: "rgba(100,200,100,0.1)", color: "#6dc96d", label: "Actif" },
-    suspendu: { bg: "rgba(230,195,100,0.1)", color: "#e6c364", label: "Suspendu" },
-    archive:  { bg: "rgba(200,100,100,0.1)", color: "#d06060", label: "Archiv\u00e9" },
-  };
-
   function handleLogout() {
     localStorage.removeItem("entrealm_admin_token");
     localStorage.removeItem("entrealm_admin_name");
@@ -80,7 +68,7 @@ export default function AdminArtistesPage() {
   return (
     <div className={manrope.className} style={{ minHeight: "100vh", background: "#0a0906", color: "#e7e2db", display: "flex" }}>
 
-      {/* ── SIDEBAR ── */}
+      {/* \u2500\u2500 SIDEBAR \u2500\u2500 */}
       <aside
         style={{
           width: "220px",
@@ -128,11 +116,11 @@ export default function AdminArtistesPage() {
             transition: "all .3s",
           }}
         >
-          Déconnexion
+          D\u00e9connexion
         </button>
       </aside>
 
-      {/* ── MAIN ── */}
+      {/* \u2500\u2500 MAIN \u2500\u2500 */}
       <main style={{ flex: 1, padding: "3rem", overflow: "auto" }}>
         <p style={{ fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#99907e", marginBottom: "0.5rem", fontWeight: 600 }}>
           Gestion
@@ -142,7 +130,7 @@ export default function AdminArtistesPage() {
         </h1>
 
         {artistes.length === 0 ? (
-          <p style={{ color: "#99907e" }}>Aucun artiste enregistré.</p>
+          <p style={{ color: "#99907e" }}>Aucun artiste enregistr\u00e9.</p>
         ) : (
           <div style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -169,7 +157,16 @@ export default function AdminArtistesPage() {
               </thead>
               <tbody>
                 {artistes.map((a) => (
-                  <tr key={a._id}>
+                  <tr
+                    key={a._id}
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => router.push(`/admin/artistes/${a._id}`)}
+                    onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); router.push(`/admin/artistes/${a._id}`); } }}
+                    style={{ cursor: "pointer", transition: "background 0.2s" }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "rgba(230,195,100,0.04)"; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
+                  >
                     <td style={{ padding: "0.75rem 1rem", fontSize: "0.9rem", color: "#e7e2db", borderBottom: "1px solid rgba(230,195,100,0.05)" }}>
                       {a.name}
                     </td>
@@ -177,7 +174,7 @@ export default function AdminArtistesPage() {
                       {a.email}
                     </td>
                     <td style={{ padding: "0.75rem 1rem", fontSize: "0.85rem", color: "#e6c364", borderBottom: "1px solid rgba(230,195,100,0.05)" }}>
-                      {a.plan || "—"}
+                      {a.plan ? PLAN_LABELS[a.plan] || a.plan : "\u2014"}
                     </td>
                     <td style={{ padding: "0.75rem 1rem", borderBottom: "1px solid rgba(230,195,100,0.05)" }}>
                       {(() => {
@@ -186,7 +183,6 @@ export default function AdminArtistesPage() {
                           <span
                             style={{
                               fontSize: "0.75rem",
-                              fontFamily: "var(--font-manrope)",
                               letterSpacing: "0.1em",
                               textTransform: "uppercase",
                               padding: "0.25rem 0.6rem",
