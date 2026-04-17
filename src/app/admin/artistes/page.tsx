@@ -68,7 +68,7 @@ export default function AdminArtistesPage() {
   return (
     <div className={manrope.className} style={{ minHeight: "100vh", background: "#0a0906", color: "#e7e2db", display: "flex" }}>
 
-      {/* \u2500\u2500 SIDEBAR \u2500\u2500 */}
+      {/* ── SIDEBAR ── */}
       <aside
         style={{
           width: "220px",
@@ -116,11 +116,11 @@ export default function AdminArtistesPage() {
             transition: "all .3s",
           }}
         >
-          D\u00e9connexion
+          Déconnexion
         </button>
       </aside>
 
-      {/* \u2500\u2500 MAIN \u2500\u2500 */}
+      {/* ── MAIN ── */}
       <main style={{ flex: 1, padding: "3rem", overflow: "auto" }}>
         <p style={{ fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#99907e", marginBottom: "0.5rem", fontWeight: 600 }}>
           Gestion
@@ -130,7 +130,7 @@ export default function AdminArtistesPage() {
         </h1>
 
         {artistes.length === 0 ? (
-          <p style={{ color: "#99907e" }}>Aucun artiste enregistr\u00e9.</p>
+          <p style={{ color: "#99907e" }}>Aucun artiste enregistré.</p>
         ) : (
           <div style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse" }}>

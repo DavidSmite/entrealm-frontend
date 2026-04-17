@@ -198,7 +198,7 @@ export default function AdminArtisteDetailPage() {
   return (
     <div className={manrope.className} style={{ minHeight: "100vh", background: "#0a0906", color: "#e7e2db", display: "flex" }}>
 
-      {/* \u2500\u2500 SIDEBAR \u2500\u2500 */}
+      {/* ── SIDEBAR ── */}
       <aside
         style={{
           width: "220px",
@@ -239,11 +239,11 @@ export default function AdminArtisteDetailPage() {
             transition: "all .3s",
           }}
         >
-          D\u00e9connexion
+          Déconnexion
         </button>
       </aside>
 
-      {/* \u2500\u2500 MAIN \u2500\u2500 */}
+      {/* ── MAIN ── */}
       <main style={{ flex: 1, padding: "3rem", overflow: "auto", maxWidth: "960px" }}>
 
         {/* Breadcrumb */}
@@ -286,7 +286,7 @@ export default function AdminArtisteDetailPage() {
               <p style={{ fontSize: "0.95rem", color: "#99907e", fontStyle: "italic", margin: "0.25rem 0 0" }}>{artist.tagline}</p>
             )}
             <p style={{ fontSize: "0.8rem", color: "#99907e", margin: "0.5rem 0 0" }}>
-              @{artist.slug} \u00b7 {artist.email} \u00b7 Inscrit le {new Date(artist.createdAt).toLocaleDateString("fr-FR")}
+              @{artist.slug} · {artist.email} · Inscrit le {new Date(artist.createdAt).toLocaleDateString("fr-FR")}
             </p>
           </div>
         </div>
@@ -326,7 +326,7 @@ export default function AdminArtisteDetailPage() {
               >
                 <option value="actif">Actif</option>
                 <option value="suspendu">Suspendu</option>
-                <option value="archive">Archiv\u00e9</option>
+                <option value="archive">Archivé</option>
               </select>
             </div>
             {/* Plan */}
@@ -351,9 +351,9 @@ export default function AdminArtisteDetailPage() {
                   opacity: saving ? 0.5 : 1,
                 }}
               >
-                <option value="">\u2014 Aucun</option>
-                <option value="vitrine">Vitrine (24\u20ac/mois)</option>
-                <option value="scene">Sc\u00e8ne (44\u20ac/mois)</option>
+                <option value="">— Aucun</option>
+                <option value="vitrine">Vitrine (24€/mois)</option>
+                <option value="scene">Scène (44€/mois)</option>
                 <option value="ambassadeur">Ambassadeur</option>
               </select>
             </div>
@@ -369,7 +369,7 @@ export default function AdminArtisteDetailPage() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem" }}>
               <div style={{ background: "#0f0d0a", border: "1px solid rgba(230,195,100,0.1)", borderRadius: "4px", padding: "1.5rem" }}>
                 <p style={{ fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#99907e", marginBottom: "0.75rem", fontWeight: 600 }}>
-                  R\u00e9servations pay\u00e9es
+                  Réservations payées
                 </p>
                 <p className={cinzel.className} style={{ fontSize: "1.6rem", color: "#e6c364", fontWeight: 400, margin: 0 }}>
                   {stats.nbReservations}
@@ -410,11 +410,11 @@ export default function AdminArtisteDetailPage() {
           </section>
         )}
 
-        {/* Section R\u00c9SEAUX SOCIAUX */}
+        {/* Section RÉSEAUX SOCIAUX */}
         {socialEntries.length > 0 && (
           <section style={{ marginBottom: "2.5rem" }}>
             <h2 className={cinzel.className} style={{ fontSize: "1.2rem", fontWeight: 400, letterSpacing: "0.05em", color: "#e7e2db", margin: "0 0 1rem" }}>
-              R\u00e9seaux sociaux
+              Réseaux sociaux
             </h2>
             <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap" }}>
               {socialEntries.map(([key, url]) => (
@@ -438,7 +438,7 @@ export default function AdminArtisteDetailPage() {
             Services ({(artist.services || []).length})
           </h2>
           {(!artist.services || artist.services.length === 0) ? (
-            <p style={{ color: "#99907e" }}>Aucun service d\u00e9fini.</p>
+            <p style={{ color: "#99907e" }}>Aucun service défini.</p>
           ) : (
             <div style={{ overflowX: "auto" }}>
               <table style={{ width: "100%", borderCollapse: "collapse" }}>
