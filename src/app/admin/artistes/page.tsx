@@ -16,7 +16,8 @@ interface Artiste {
   name: string;
   email: string;
   plan?: string;
-  isActive: boolean;
+  status?: string;
+  isActive?: boolean;
   createdAt: string;
 }
 
@@ -48,6 +49,19 @@ export default function AdminArtistesPage() {
         router.replace("/admin/login");
       });
   }, [router]);
+
+  const getStatus = (a: Artiste): "actif" | "suspendu" | "archive" => {
+    if (a.status === "actif" || a.status === "suspendu" || a.status === "archive") {
+      return a.status;
+    }
+    return a.isActive ? "actif" : "archive";
+  };
+
+  const STATUS_STYLES: Record<"actif"|"suspendu"|"archive", {bg:string;color:string;label:string}> = {
+    actif:    { bg: "rgba(100,200,100,0.1)", color: "#6dc96d", label: "Actif" },
+    suspendu: { bg: "rgba(230,195,100,0.1)", color: "#e6c364", label: "Suspendu" },
+    archive:  { bg: "rgba(200,100,100,0.1)", color: "#d06060", label: "Archiv\u00e9" },
+  };
 
   function handleLogout() {
     localStorage.removeItem("entrealm_admin_token");
@@ -166,19 +180,25 @@ export default function AdminArtistesPage() {
                       {a.plan || "—"}
                     </td>
                     <td style={{ padding: "0.75rem 1rem", borderBottom: "1px solid rgba(230,195,100,0.05)" }}>
-                      <span
-                        style={{
-                          fontSize: "0.7rem",
-                          letterSpacing: "0.08em",
-                          textTransform: "uppercase",
-                          padding: "0.25rem 0.6rem",
-                          borderRadius: "2px",
-                          background: a.isActive ? "rgba(100,200,100,0.1)" : "rgba(200,100,100,0.1)",
-                          color: a.isActive ? "#6dc96d" : "#d06060",
-                        }}
-                      >
-                        {a.isActive ? "Actif" : "Inactif"}
-                      </span>
+                      {(() => {
+                        const s = STATUS_STYLES[getStatus(a)];
+                        return (
+                          <span
+                            style={{
+                              fontSize: "0.75rem",
+                              fontFamily: "var(--font-manrope)",
+                              letterSpacing: "0.1em",
+                              textTransform: "uppercase",
+                              padding: "0.25rem 0.6rem",
+                              borderRadius: "2px",
+                              background: s.bg,
+                              color: s.color,
+                            }}
+                          >
+                            {s.label}
+                          </span>
+                        );
+                      })()}
                     </td>
                     <td style={{ padding: "0.75rem 1rem", fontSize: "0.85rem", color: "#99907e", borderBottom: "1px solid rgba(230,195,100,0.05)" }}>
                       {new Date(a.createdAt).toLocaleDateString("fr-FR")}
