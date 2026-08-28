@@ -136,7 +136,10 @@ export default function JobySmithDashboard() {
     let cancelled = false;
     (async () => {
       try {
-        const res = await fetchWithTimeout(`${API}/api/entrealm/dashboard/joby-smith`, { cache: "no-store" });
+        const res = await fetchWithTimeout(`${API}/api/entrealm/dashboard/joby-smith`, {
+          cache: "no-store",
+          headers: { Authorization: `Bearer ${token}` },
+        });
         if (!res.ok) throw new Error("Erreur chargement dashboard");
         const json = await res.json();
         if (!cancelled) setData(json);
