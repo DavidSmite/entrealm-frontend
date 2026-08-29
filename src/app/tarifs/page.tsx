@@ -72,7 +72,11 @@ const FAQ = [
   },
   {
     q: "Ce que ca coute",
-    a: "Rien a l'inscription, rien tous les mois. ENTREALM ART retient 15 % du montant de la prestation, lorsque vous etes reserve. Si vous n'etes pas reserve, vous ne payez rien.",
+    a: "9 EUR par mois pour votre page et vos outils. Et 10 % uniquement sur les reservations qui naissent d'ENTREALM ART : quand c'est nous qui vous amenons le client. Sur les affaires que vous decrochez vous-meme, nous ne prenons rien.",
+  },
+  {
+    q: "Pourquoi un abonnement ET une commission ?",
+    a: "Parce que ce sont deux choses differentes. L'abonnement paie l'outil : votre page, votre dossier, l'encaissement securise, vos factures. La commission paie l'apport d'affaires, et elle n'est due que lorsque le client vient de nous.",
   },
 ];
 
@@ -261,10 +265,15 @@ export default function TarifsPage() {
           >
             Nos conditions
           </h2>
+          <p style={{ color: "#ccc", fontSize: "0.95rem", lineHeight: 1.8, marginBottom: "1.2rem" }}>
+            <strong style={{ color: "#f5ede0" }}>9 EUR par mois</strong> pour votre page
+            et vos outils. Tarif fondateur, conserve a vie par les trente premiers
+            artistes selectionnes.
+          </p>
           <p style={{ color: "#ccc", fontSize: "0.95rem", lineHeight: 1.8 }}>
-            Rien a l&apos;inscription, rien tous les mois. ENTREALM ART retient{" "}
-            <strong style={{ color: "#f5ede0" }}>15 % du montant de la prestation</strong>,
-            lorsque vous etes reserve.
+            Et <strong style={{ color: "#f5ede0" }}>10 %</strong> uniquement sur les
+            reservations qui naissent d&apos;ENTREALM ART. Sur les affaires que vous
+            decrochez vous-meme, nous ne prenons rien.
           </p>
         </FadeIn>
 
