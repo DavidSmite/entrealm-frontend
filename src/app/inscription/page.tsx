@@ -449,11 +449,8 @@ export default function InscriptionPage() {
               La chorale fondee par Joby Smith — entre Paris et Londres
             </p>
             <p style={{ color: "#ccc", fontSize: "0.88rem", lineHeight: 1.7, marginBottom: "1rem" }}>
-              Les membres de Sankofa Unit beneficient d&apos;un acces Ambassadeur offert.
-              Utilisez votre code d&apos;invitation pour rejoindre ENTREALM ART gratuitement.
-            </p>
-            <p style={{ color: "#999", fontSize: "0.78rem", fontStyle: "italic", lineHeight: 1.6 }}>
-              L&apos;abonnement est offert — les commissions sur reservations et ventes restent applicables dans les conditions standard.
+              Les membres de Sankofa Unit beneficient d&apos;un acces offert.
+              Deposez votre candidature en le mentionnant dans votre message : nous prendrons le relais.
             </p>
           </div>
         </FadeIn>
