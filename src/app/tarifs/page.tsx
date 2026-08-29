@@ -47,17 +47,17 @@ const STEPS = [
   {
     n: "1",
     title: "Vous candidatez",
-    body: "Vous presentez votre parcours et vos references. Chaque candidature est lue : ENTREALM ART selectionne sur dossier.",
+    body: "Vous présentez votre parcours et vos références. Chaque candidature est lue : ENTREALM ART sélectionne sur dossier.",
   },
   {
     n: "2",
     title: "Votre profil devient votre vitrine",
-    body: "Photos, parcours, references, configurations, disponibilites : de quoi etre choisi par un professionnel.",
+    body: "Photos, parcours, références, configurations, disponibilités : de quoi être choisi par un professionnel.",
   },
   {
     n: "3",
-    title: "On vous reserve",
-    body: "Le client regle sur la plateforme, le paiement est securise, vous etes paye apres la prestation.",
+    title: "On vous réserve",
+    body: "Le client règle sur la plateforme, le paiement est sécurisé, vous êtes payé après la prestation.",
   },
 ];
 
@@ -67,16 +67,16 @@ const FAQ = [
     a: "ENTREALM ART est ouvert aux artistes professionnels ou en devenir. Chaque profil fait l'objet d'une validation qualitative avant publication sur la plateforme.",
   },
   {
-    q: "Que se passe-t-il apres ma candidature ?",
+    q: "Que se passe-t-il après ma candidature ?",
     a: "Nous lisons votre dossier et revenons vers vous sous 48 heures. Si votre profil est retenu, nous construisons votre page avec vous.",
   },
   {
-    q: "Ce que ca coute",
-    a: "9 EUR par mois pour votre page et vos outils. Et 10 % uniquement sur les reservations qui naissent d'ENTREALM ART : quand c'est nous qui vous amenons le client. Sur les affaires que vous decrochez vous-meme, nous ne prenons rien.",
+    q: "Combien ça coûte ?",
+    a: "9 € par mois pour votre page et vos outils. Et 10 % uniquement sur les réservations qui naissent d'ENTREALM ART : quand c'est nous qui vous amenons le client. Sur les affaires que vous décrochez vous-même, nous ne prenons rien.",
   },
   {
-    q: "Pourquoi un abonnement ET une commission ?",
-    a: "Parce que ce sont deux choses differentes. L'abonnement paie l'outil : votre page, votre dossier, l'encaissement securise, vos factures. La commission paie l'apport d'affaires, et elle n'est due que lorsque le client vient de nous.",
+    q: "Pourquoi un abonnement et une commission ?",
+    a: "Parce que ce sont deux choses différentes. L'abonnement paie l'outil : votre page, votre dossier, l'encaissement sécurisé, vos factures. La commission paie l'apport d'affaires, et elle n'est due que lorsque le client vient de nous.",
   },
 ];
 
@@ -213,13 +213,13 @@ export default function TarifsPage() {
               marginBottom: "0.6rem",
             }}
           >
-            Comment ca marche
+            Comment ça marche
           </h1>
         </FadeIn>
 
         <FadeIn delay={400}>
           <p style={{ color: "#999", fontSize: "1rem", letterSpacing: "0.04em" }}>
-            Rejoindre ENTREALM ART, etape par etape
+            Rejoindre ENTREALM ART, étape par étape
           </p>
         </FadeIn>
       </section>
@@ -266,14 +266,14 @@ export default function TarifsPage() {
             Nos conditions
           </h2>
           <p style={{ color: "#ccc", fontSize: "0.95rem", lineHeight: 1.8, marginBottom: "1.2rem" }}>
-            <strong style={{ color: "#f5ede0" }}>9 EUR par mois</strong> pour votre page
-            et vos outils. Tarif fondateur, conserve a vie par les trente premiers
-            artistes selectionnes.
+            <strong style={{ color: "#f5ede0" }}>9 € par mois</strong> pour votre page
+            et vos outils. Tarif fondateur, conservé à vie par les trente premiers
+            artistes sélectionnés.
           </p>
           <p style={{ color: "#ccc", fontSize: "0.95rem", lineHeight: 1.8 }}>
             Et <strong style={{ color: "#f5ede0" }}>10 %</strong> uniquement sur les
-            reservations qui naissent d&apos;ENTREALM ART. Sur les affaires que vous
-            decrochez vous-meme, nous ne prenons rien.
+            réservations qui naissent d&apos;ENTREALM ART. Sur les affaires que vous
+            décrochez vous-même, nous ne prenons rien.
           </p>
         </FadeIn>
 
@@ -325,7 +325,7 @@ export default function TarifsPage() {
               marginBottom: "1.5rem",
             }}
           >
-            Questions frequentes
+            Questions fréquentes
           </h2>
         </FadeIn>
 
