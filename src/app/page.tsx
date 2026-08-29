@@ -53,7 +53,7 @@ const VALUES = [
   {
     icon: <IconEuro />,
     title: "Revenus",
-    text: "Fixez vos tarifs, ENTREALM s\u2019occupe du reste (commission 15\u00A0%)",
+    text: "Fixez vos tarifs, ENTREALM s\u2019occupe du reste",
   },
 ];
 
