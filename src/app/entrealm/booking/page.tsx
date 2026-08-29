@@ -15,7 +15,7 @@ const manrope = Manrope({
   weight: ["400", "700"],
 });
 
-const API = "https://turnkey-backend-8y0i.onrender.com";
+const API = process.env.NEXT_PUBLIC_API_URL || "https://turnkey-backend-8y0i.onrender.com";
 
 const ARTISTS: Record<string, { name: string; services: { name: string; slug: string; amount: number; price: string }[] }> = {
   "joby-smith": {
@@ -109,13 +109,11 @@ function BookingContent() {
         <div className="nav-links" style={{ display: "flex", alignItems: "center", gap: "2.5rem" }}>
           {[
             { label: "Galerie", href: "joby-smith/videos" },
-            { label: "Coaching", href: "coaching" },
-            { label: "Réservations", href: "bookings" },
-            { label: "Archive", href: "archive" },
+            { label: "Coaching", href: "joby-smith/coaching" },
           ].map((l) => (
             <a
               key={l.href}
-              href={`/entrealm/${l.href}`}
+              href={l.href.startsWith("mailto:") ? l.href : `/entrealm/${l.href}`}
               style={{ fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#99907e", textDecoration: "none", fontWeight: 500, transition: "color .3s" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "#e6c364")}
               onMouseLeave={(e) => (e.currentTarget.style.color = "#99907e")}
@@ -124,7 +122,7 @@ function BookingContent() {
             </a>
           ))}
           <a
-            href="mailto:contact@entrealm.com?subject=Joby Smith — Contact"
+            href="mailto:contact@entrealmart.com?subject=Joby Smith — Contact"
             style={{ padding: "0.5rem 1.5rem", background: "linear-gradient(135deg,#e6c364,#c9a84c)", color: "#0a0906", fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", fontWeight: 600 }}
           >
             Contact
@@ -217,7 +215,7 @@ function BookingContent() {
                   </span>
                   {isDevis ? (
                     <a
-                      href={`mailto:contact@entrealm.com?subject=Sankofa Unit — Demande de devis`}
+                      href={`mailto:contact@entrealmart.com?subject=Sankofa Unit — Demande de devis`}
                       style={{
                         padding: "0.65rem 1.8rem",
                         border: "1px solid rgba(230,195,100,0.4)",
@@ -274,13 +272,11 @@ function BookingContent() {
         </p>
         <div style={{ display: "flex", gap: "2rem" }}>
           {[
-            { label: "Confidentialité", href: "privacy" },
-            { label: "Conditions", href: "terms" },
-            { label: "Contact", href: "contact" },
+            { label: "Contact", href: "mailto:contact@entrealmart.com?subject=Contact — ENTREALM" },
           ].map((l) => (
             <a
               key={l.href}
-              href={`/entrealm/${l.href}`}
+              href={l.href.startsWith("mailto:") ? l.href : `/entrealm/${l.href}`}
               style={{ fontSize: "0.65rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#99907e", textDecoration: "none", fontWeight: 500, transition: "color .3s" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "#e6c364")}
               onMouseLeave={(e) => (e.currentTarget.style.color = "#99907e")}

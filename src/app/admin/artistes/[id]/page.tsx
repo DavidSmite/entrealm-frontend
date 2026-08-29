@@ -16,7 +16,7 @@ import {
 const cinzel = Cinzel({ subsets: ["latin"], weight: ["400", "700"] });
 const manrope = Manrope({ subsets: ["latin"], weight: ["400", "700"] });
 
-const API = "https://turnkey-backend-8y0i.onrender.com";
+const API = process.env.NEXT_PUBLIC_API_URL || "https://turnkey-backend-8y0i.onrender.com";
 
 interface Artist {
   _id: string;

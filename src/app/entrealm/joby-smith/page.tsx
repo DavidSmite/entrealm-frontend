@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
 
-const PUBLIC_API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+const PUBLIC_API = process.env.NEXT_PUBLIC_API_URL || "https://turnkey-backend-8y0i.onrender.com";
 
 const THEMES = {
   dark: { bg: "#0a0906", bgAlt: "#0f0d0a", bgCard: "#1d1b17", text: "#e7e2db", textMuted: "#99907e", textSub: "#d0c5b2", accent: "#e6c364", accentAlt: "#c9a84c", border: "rgba(201,168,76,0.15)" },
@@ -77,13 +77,11 @@ export default function JobySmithPage() {
         <div className="nav-links" style={{ display: "flex", alignItems: "center", gap: "2.5rem" }}>
           {[
             { label: "Galerie", href: "joby-smith/videos" },
-            { label: "Coaching", href: "coaching" },
-            { label: "Réservations", href: "bookings" },
-            { label: "Archive", href: "archive" },
+            { label: "Coaching", href: "joby-smith/coaching" },
           ].map((l) => (
             <a
               key={l.href}
-              href={`/entrealm/${l.href}`}
+              href={l.href.startsWith("mailto:") ? l.href : `/entrealm/${l.href}`}
               style={{ fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", color: th.text, textDecoration: "none", fontWeight: 500, transition: "color .3s" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = th.accent)}
               onMouseLeave={(e) => (e.currentTarget.style.color = th.text)}
@@ -92,7 +90,7 @@ export default function JobySmithPage() {
             </a>
           ))}
           <a
-            href="mailto:contact@entrealm.com?subject=Joby Smith — Contact"
+            href="mailto:contact@entrealmart.com?subject=Joby Smith — Contact"
             style={{ padding: "0.5rem 1.5rem", background: "linear-gradient(135deg,#e6c364,#c9a84c)", color: "#0a0906", fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase", textDecoration: "none", fontWeight: 600 }}
           >
             Contact
@@ -390,13 +388,11 @@ export default function JobySmithPage() {
         </p>
         <div style={{ display: "flex", gap: "2rem" }}>
           {[
-            { label: "Confidentialité", href: "privacy" },
-            { label: "Conditions", href: "terms" },
-            { label: "Contact", href: "contact" },
+            { label: "Contact", href: "mailto:contact@entrealmart.com?subject=Contact — ENTREALM" },
           ].map((l) => (
             <a
               key={l.href}
-              href={`/entrealm/${l.href}`}
+              href={l.href.startsWith("mailto:") ? l.href : `/entrealm/${l.href}`}
               style={{ fontSize: "0.65rem", letterSpacing: "0.1em", textTransform: "uppercase", color: th.textMuted, textDecoration: "none", fontWeight: 500, transition: "color .3s" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = th.accent)}
               onMouseLeave={(e) => (e.currentTarget.style.color = th.textMuted)}

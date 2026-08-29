@@ -155,8 +155,8 @@ export default function HomePage() {
       >
         {[
           { label: "Artistes", href: "#artistes" },
-          { label: "Tarifs", href: "/entrealm/tarifs" },
-          { label: "Inscription", href: "/entrealm/inscription" },
+          { label: "Tarifs", href: "/tarifs" },
+          { label: "Inscription", href: "/inscription" },
           { label: "Login", href: "/entrealm/login" },
         ].map((l) => (
           <a
@@ -239,7 +239,7 @@ export default function HomePage() {
             justifyContent: "center",
           }}
         >
-          <GoldButton href="mailto:contact@entrealm.com?subject=Présentation artiste — ENTREALM">
+          <GoldButton href="/inscription">
             Présenter mon artiste
           </GoldButton>
           <GoldButton href="/entrealm/joby-smith" outline>
@@ -500,7 +500,7 @@ export default function HomePage() {
           Places limitées — Artistes sélectionnés sur dossier
         </p>
 
-        <GoldButton href="mailto:contact@entrealm.com?subject=Dossier artiste — ENTREALM">
+        <GoldButton href="/inscription">
           Soumettre mon dossier
         </GoldButton>
       </section>

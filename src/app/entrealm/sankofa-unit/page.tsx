@@ -182,7 +182,7 @@ export default function SankofaUnitPage() {
             </Link>
           ))}
           <Link
-            href="mailto:contact@entrealm.com?subject=Sankofa Unit — Contact"
+            href="mailto:contact@entrealmart.com?subject=Sankofa Unit — Contact"
             style={{
               padding: "0.5rem 1.5rem",
               background: "linear-gradient(135deg,#e6c364,#c9a84c)",

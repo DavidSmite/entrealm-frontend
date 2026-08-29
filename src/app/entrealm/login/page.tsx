@@ -8,7 +8,7 @@ import Link from "next/link";
 const notoSerif = Noto_Serif({ subsets: ["latin"], weight: ["400", "700"] });
 const manrope = Manrope({ subsets: ["latin"], weight: ["400", "700"] });
 
-const API = "https://turnkey-backend-8y0i.onrender.com";
+const API = process.env.NEXT_PUBLIC_API_URL || "https://turnkey-backend-8y0i.onrender.com";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -74,7 +74,7 @@ export default function LoginPage() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="artiste@entrealm.com"
+            placeholder="artiste@entrealmart.com"
             style={{ background: "#1d1b17", border: "1px solid #4d4637", color: "#e7e2db", padding: "0.75rem 1rem", width: "100%", marginBottom: "1.5rem", fontSize: "0.9rem", outline: "none" }}
           />
 
@@ -112,7 +112,7 @@ export default function LoginPage() {
 
         <p style={{ textAlign: "center" }}>
           <a
-            href="mailto:contact@entrealm.com?subject=Mot de passe oublié"
+            href="mailto:contact@entrealmart.com?subject=Mot de passe oublié"
             style={{ fontSize: "0.75rem", color: "#99907e", textDecoration: "none", transition: "color .3s" }}
             onMouseEnter={(e) => (e.currentTarget.style.color = "#e6c364")}
             onMouseLeave={(e) => (e.currentTarget.style.color = "#99907e")}

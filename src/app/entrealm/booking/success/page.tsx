@@ -14,7 +14,7 @@ const cinzel = Cinzel({
   weight: ["400", "700"],
 });
 
-const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+const API = process.env.NEXT_PUBLIC_API_URL || "https://turnkey-backend-8y0i.onrender.com";
 
 interface BookingInfo {
   artistName: string;

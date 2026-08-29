@@ -39,7 +39,7 @@ function FadeIn({
   );
 }
 
-const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+const API = process.env.NEXT_PUBLIC_API_URL || "https://turnkey-backend-8y0i.onrender.com";
 
 const DISCIPLINES = [
   "Musique",
@@ -89,7 +89,6 @@ export default function InscriptionPage() {
     discipline: "",
     typeProfil: "",
     offre: "",
-    codeInvitation: "",
     lienTravail: "",
     message: "",
     conditions: false,
@@ -110,11 +109,6 @@ export default function InscriptionPage() {
     }
     if (!form.conditions) {
       setErrorMsg("Veuillez accepter les conditions d'utilisation.");
-      setStatus("error");
-      return;
-    }
-    if (form.offre === "ambassadeur" && form.codeInvitation !== "SANKOFA2026") {
-      setErrorMsg("Code d'invitation invalide.");
       setStatus("error");
       return;
     }
@@ -318,7 +312,6 @@ export default function InscriptionPage() {
                 {[
                   { value: "vitrine", label: "VITRINE — 24€/mois (14 jours gratuits)" },
                   { value: "scene", label: "SCENE — 44€/mois (14 jours gratuits)" },
-                  { value: "ambassadeur", label: "AMBASSADEUR — Sur invitation" },
                 ].map((o) => (
                   <label
                     key={o.value}
@@ -347,30 +340,8 @@ export default function InscriptionPage() {
                   </label>
                 ))}
               </div>
-              {form.offre === "ambassadeur" && (
-                <p style={{ color: "#999", fontSize: "0.78rem", fontStyle: "italic", marginTop: "0.5rem", lineHeight: 1.6 }}>
-                  Abonnement offert sur invitation — commission standard applicable sur les reservations et ventes (8% VITRINE / 10% SCENE)
-                </p>
-              )}
             </div>
 
-            {/* Code d'invitation (si ambassadeur) */}
-            {form.offre === "ambassadeur" && (
-              <FadeIn delay={0}>
-                <div>
-                  <label style={labelStyle}>Code d&apos;invitation *</label>
-                  <input
-                    type="text"
-                    value={form.codeInvitation}
-                    onChange={(e) => update("codeInvitation", e.target.value.toUpperCase())}
-                    placeholder="Ex: SANKOFA2026"
-                    style={{ ...inputStyle, letterSpacing: "0.1em" }}
-                    onFocus={(e) => (e.currentTarget.style.borderColor = "#e6c364")}
-                    onBlur={(e) => (e.currentTarget.style.borderColor = "#4d4637")}
-                  />
-                </div>
-              </FadeIn>
-            )}
 
             {/* Lien travail */}
             <div>

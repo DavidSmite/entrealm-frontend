@@ -82,10 +82,10 @@ export default function CoachingPage() {
         </a>
 
         <div style={{ display: "flex", alignItems: "center", gap: "2.5rem" }} className="nav-links">
-          {[{ label: "Galerie", href: "gallery" }, { label: "Coaching", href: "coaching" }, { label: "Réservations", href: "bookings" }, { label: "Archive", href: "archive" }].map((link) => (
+          {[{ label: "Galerie", href: "joby-smith/videos" }, { label: "Coaching", href: "joby-smith/coaching" }, ].map((link) => (
             <a
               key={link.href}
-              href={`/entrealm/${link.href}`}
+              href={link.href.startsWith("mailto:") ? link.href : `/entrealm/${link.href}`}
               className={manrope.className}
               style={{
                 fontSize: "0.7rem",
@@ -103,7 +103,7 @@ export default function CoachingPage() {
             </a>
           ))}
           <a
-            href="mailto:contact@entrealm.com?subject=Joby Smith — Contact"
+            href="mailto:contact@entrealmart.com?subject=Joby Smith — Contact"
             style={{
               padding: "0.5rem 1.5rem",
               background: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryContainer})`,
@@ -363,7 +363,7 @@ export default function CoachingPage() {
                   <a
                     href={
                       s.slug === "sankofa-unit"
-                        ? "mailto:contact@entrealm.com?subject=Sankofa Unit — Demande de devis"
+                        ? "mailto:contact@entrealmart.com?subject=Sankofa Unit — Demande de devis"
                         : `/entrealm/booking?artist=joby-smith&service=${s.slug}`
                     }
                     className={manrope.className}
@@ -507,10 +507,10 @@ export default function CoachingPage() {
         </p>
 
         <div style={{ display: "flex", gap: "2rem" }}>
-          {[{ label: "Confidentialité", href: "privacy" }, { label: "Conditions", href: "terms" }, { label: "Contact", href: "contact" }].map((link) => (
+          {[ { label: "Contact", href: "mailto:contact@entrealmart.com?subject=Contact — ENTREALM" }].map((link) => (
             <a
               key={link.href}
-              href={`/entrealm/${link.href}`}
+              href={link.href.startsWith("mailto:") ? link.href : `/entrealm/${link.href}`}
               className={manrope.className}
               style={{
                 fontSize: "0.65rem",
