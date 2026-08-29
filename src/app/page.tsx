@@ -155,7 +155,7 @@ export default function HomePage() {
       >
         {[
           { label: "Artistes", href: "#artistes" },
-          { label: "Tarifs", href: "/tarifs" },
+          { label: "Comment ça marche", href: "/tarifs" },
           { label: "Inscription", href: "/inscription" },
           { label: "Login", href: "/entrealm/login" },
         ].map((l) => (
